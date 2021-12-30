@@ -101,11 +101,35 @@ int main() {
 */
 
   //Day 4
-  vector<string> bingoData = getData4("test.txt");
-  //vector<string> bingoData = getData4("Day4-input.txt");//the first entry is the list of draw numbers, and the rest are the boards, each number in a row separated by a space, and the boards separated by empty lines
+  //vector<string> bingoData = getData4("test.txt");
+  vector<string> bingoData = getData4("Day4-input.txt");//the first entry is the list of draw numbers, and the rest are the boards, each number in a row separated by a space, and the boards separated by empty lines
   vector<int> numbersDrawn = getNumbers(bingoData[0]);
   //vector<vector<vector<int>>> bingoBoardVectors; //to test parsing of data into bingo boards
   vector<Board> bingoBoards = getBoards(bingoData);
+
+  int i = 0;
+  pair<int, int> coords;
+  int score = 0;
+  int whichBoard = 0;
+  coords = bingoBoards[whichBoard].Contains(numbersDrawn[i]);
+  bool won = false;
+
+  while (!won && (i < numbersDrawn.size())){
+    whichBoard = 0;
+    while (!won && (whichBoard < bingoBoards.size())){
+      if (bingoBoards[whichBoard].Contains(numbersDrawn[i]) != pair(-1,-1)){
+        bingoBoards[whichBoard].SetVisited(bingoBoards[whichBoard].Contains(numbersDrawn[i]));
+        //std::cout << "board " << whichBoard << ", (" << bingoBoards[whichBoard].Contains(numbersDrawn[i]).first << ", " << bingoBoards[whichBoard].Contains(numbersDrawn[i]).second << ") \n";
+        if (bingoBoards[whichBoard].HasWon(bingoBoards[whichBoard].Contains(numbersDrawn[i]))){
+          score = bingoBoards[whichBoard].Points() * numbersDrawn[i];
+          std::cout << "score " << score <<"\n";
+          won = true;
+        }
+      }
+      whichBoard++;
+    }
+    i++;
+  }
  
  /* print out boards to make sure they loaded in properly
   for (int i = 0; i < bingoBoards.size(); i++){
