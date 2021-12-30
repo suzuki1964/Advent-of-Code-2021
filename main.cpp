@@ -108,21 +108,22 @@ int main() {
   vector<Board> bingoBoards = getBoards(bingoData);
 
   int i = 0;
-  pair<int, int> coords;
   int score = 0;
   int whichBoard = 0;
-  coords = bingoBoards[whichBoard].Contains(numbersDrawn[i]);
   bool won = false;
 
+//Part 1
+/*
   while (!won && (i < numbersDrawn.size())){
     whichBoard = 0;
     while (!won && (whichBoard < bingoBoards.size())){
+      // if whichBoard contains the number drawn, then mark the tile as visited and check if you won
       if (bingoBoards[whichBoard].Contains(numbersDrawn[i]) != pair(-1,-1)){
         bingoBoards[whichBoard].SetVisited(bingoBoards[whichBoard].Contains(numbersDrawn[i]));
         //std::cout << "board " << whichBoard << ", (" << bingoBoards[whichBoard].Contains(numbersDrawn[i]).first << ", " << bingoBoards[whichBoard].Contains(numbersDrawn[i]).second << ") \n";
         if (bingoBoards[whichBoard].HasWon(bingoBoards[whichBoard].Contains(numbersDrawn[i]))){
           score = bingoBoards[whichBoard].Points() * numbersDrawn[i];
-          std::cout << "score " << score <<"\n";
+          std::cout << "Day4, Part 1: score " << score <<"\n";
           won = true;
         }
       }
@@ -130,7 +131,36 @@ int main() {
     }
     i++;
   }
- 
+*/
+
+  //Part 2
+  
+ while (i < numbersDrawn.size()){
+    whichBoard = 0;
+    while (whichBoard < bingoBoards.size()){
+      //if whichBoard contains the number drawn, mark the tile as visited and check if it won
+      if (bingoBoards[whichBoard].Contains(numbersDrawn[i]) != pair(-1,-1)){
+        bingoBoards[whichBoard].SetVisited(bingoBoards[whichBoard].Contains(numbersDrawn[i]));
+        //std::cout << "board " << whichBoard << ", (" << bingoBoards[whichBoard].Contains(numbersDrawn[i]).first << ", " << bingoBoards[whichBoard].Contains(numbersDrawn[i]).second << ") \n";
+        if (bingoBoards[whichBoard].HasWon(bingoBoards[whichBoard].Contains(numbersDrawn[i]))){
+          score = bingoBoards[whichBoard].Points() * numbersDrawn[i];
+          std::cout << "board " << whichBoard <<" score " << score <<"\n";
+          won = true;
+          bingoBoards.erase(bingoBoards.begin()+whichBoard);
+        }
+      }
+      if (won){
+        won = false;
+        whichBoard--;
+      }
+      whichBoard++;
+    }
+    
+    i++;
+  }
+  std::cout << "Day 4, Part 2: score " << score <<"\n";
+  
+
  /* print out boards to make sure they loaded in properly
   for (int i = 0; i < bingoBoards.size(); i++){
     std::cout << "new board \n";
