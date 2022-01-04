@@ -14,7 +14,7 @@ void Board::SetTile(int row, int column, int value){
 void Board::SetVisited (pair<int, int> coords){
   bingo_board_[coords.first][coords.second].second = true;
 }
-//output the value in the (row,column) square of the board
+//output the value in the (row,column) square of the board (used for debugging)
 int Board::GetTile(int row, int column){
   return bingo_board_[row][column].first;
 }

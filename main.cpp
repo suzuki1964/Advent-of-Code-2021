@@ -14,12 +14,15 @@ int main() {
   string datafolder = "datafiles/";
   
   /*
+  //Day 1
   // Create a vector to hold the depths, a variable to count the number of times the depth increases, and a variable to count the number of times the three measurement sum increases
   string line;
+  vector<string> depthData = getData("Day3-input.txt");//vector of the depths as strings
   vector<int> depths;
   int countDepthInc = 0;//count the number of times the depth increases
   int countSumInc = 0;//count the number of times the three-measurement sum increases
 
+//vector<string> depthData = getData("Day1-input.txt");//vector of the depths as strings
   depths = getData1("Day1-input.txt");
  
   countDepthInc = countIncreases(1, depths);
@@ -40,9 +43,10 @@ int main() {
   
   subPosition = newLocation(commands);
   std::cout << "The submarine is at " << subPosition << ".\n";
-
+*/
+/*
   //Day 3
-  vector<string> binaryData = getData3("Day3-input.txt");//vector of the binary numbers
+  vector<string> binaryData = getData("Day3-input.txt");//vector of the binary numbers
   vector<int> sums;//sum of all the 1s in each column
   vector<int> gammaBits;//each bit is the most common bit in the data (by column)
   vector<int> epsilonBits;//each bit is the least common bit in the data
@@ -100,9 +104,10 @@ int main() {
   std::cout << "life support rating is " << oxygen*carbondiox << ".\n";
 */
 
+/*
   //Day 4
-  //vector<string> bingoData = getData4("test.txt");
-  vector<string> bingoData = getData4("Day4-input.txt");//the first entry is the list of draw numbers, and the rest are the boards, each number in a row separated by a space, and the boards separated by empty lines
+  //vector<string> bingoData = getData4("test4.txt");
+  vector<string> bingoData = getData("Day4-input.txt");//the first entry is the list of draw numbers, and the rest are the boards, each number in a row separated by a space, and the boards separated by empty lines
   vector<int> numbersDrawn = getNumbers(bingoData[0]);
   //vector<vector<vector<int>>> bingoBoardVectors; //to test parsing of data into bingo boards
   vector<Board> bingoBoards = getBoards(bingoData);
@@ -132,7 +137,7 @@ int main() {
     i++;
   }
 */
-
+/*
   //Part 2
   
  while (i < numbersDrawn.size()){
@@ -159,7 +164,7 @@ int main() {
     i++;
   }
   std::cout << "Day 4, Part 2: score " << score <<"\n";
-  
+  */
 
  /* print out boards to make sure they loaded in properly
   for (int i = 0; i < bingoBoards.size(); i++){
@@ -186,6 +191,70 @@ for (int i = 0; i < 3; i++){
   }
 }
 */
+/*
+//Day 5
+//vector of strings of the form 427,523 -> 427,790 which give the endpoints of the lines of vents
+  vector<string> binaryData = getData("Day5-input.txt");
+  //vector of the endpoints of the lines and the last pair is (0,0) and (x-maximum, y_maximum)
+  vector<pair<pair<int,int>, pair<int,int>>> ventEndpoints = getEndpoints(binaryData);
+  //vector of a vector of all the points on each horizontal and vertical line
+  vector<vector<pair<int,int>>> ventHVLines = getVentLines(ventEndpoints);
+  //the array for the graph of the lines which is x_maximum by y_maximum
+  int ventChart[(ventEndpoints[ventEndpoints.size()-1].second.second + 1) * (ventEndpoints[ventEndpoints.size()-1].second.first + 1)];
+  //tried to call the function on a 2D array...
+  //markVentLines(ventEndpoints[ventEndpoints.size()-1].second.second, ventEndpoints[ventEndpoints.size()-1].second.first, ventChart, ventLines);
+  //the graph of all the points covered by the lines with multiplicity (so 1 if on one line, two if at an intersection of two lines)
+  markVentLines(ventEndpoints[ventEndpoints.size()-1].second.first, ventEndpoints[ventEndpoints.size()-1].second.second, ventChart, ventHVLines);
+  //the number of points where at least two vent lines overlap
+  int dangerZone = getDangerZone(ventEndpoints[ventEndpoints.size()-1].second.first, ventEndpoints[ventEndpoints.size()-1].second.second, ventChart);
+  std::cout << "Danger zone with horizontal and vertical lines is " << dangerZone << "\n";
+
+//Part 2 
+ //add the diagonal lines too
+  vector<vector<pair<int,int>>> ventHVDLines = addDiagVentLines(ventHVLines,ventEndpoints);
+  markVentLines(ventEndpoints[ventEndpoints.size()-1].second.first, ventEndpoints [ventEndpoints.size()-1].second.second, ventChart, ventHVDLines);
+  //the number of points where at least two vent lines overlap
+  int dangerZoneAll = getDangerZone(ventEndpoints[ventEndpoints.size()-1].second.first, ventEndpoints[ventEndpoints.size()-1].second.second, ventChart);
+  std::cout << "Danger zone with horizontal, vertical, and diagonal lines is " << dangerZoneAll << "\n";
+  /*
+  //print out the pairs of endpoints to make sure it was parsed correctly with the test case
+  for (int i = 0; i < ventEndpoints.size(); i++){
+    std::cout << "(" << ventEndpoints[i].first.first << ", " << ventEndpoints[i].first.second << ") (" << ventEndpoints[i].second.first << ", " << ventEndpoints[i].second.second << ") \n";
+  }
+  */
+
+/*
+  //print out the points on the lines to make sure it was done correctly
+  for (int i = 0; i < ventHVDLines.size(); i++){
+    for (int j = 0; j < ventHVDLines[i].size(); j++){
+      std::cout << "(" << ventHVDLines[i][j].first << ", " << ventHVDLines[i][j].second << ") " << "line " << i << ", point " << j << "\n";
+    }
+  }
+  */
+
+  /*
+  //print out the graph of the lines to check the test case
+  for (int i = 0; i <= ventEndpoints[ventEndpoints.size()-1].second.second; i++){
+   for (int j = 0; j <= ventEndpoints[ventEndpoints.size()-1].second.first; j++){
+     std::cout << ventChart[(i * (ventEndpoints[ventEndpoints.size()-1].second.first+1)) + j] << " ";
+   }
+   std::cout << "\n";
+  }
+  */
+  
+  //Day 6
+  vector<string> fishData = getData("test6.txt");//this is just one string
+  //parse the string into numbers which give the timer values for each fish on the initial day
+  vector<int> timerValues = getInitTimers(fishData);
+  //each line (vector) represents the timers of all the fish that day and days is the number of days you want to check
+  vector<vector<int>> dailyTimerValues = getDailyTimers(timerValues, days);
+  
+  
+
+  for (int i = 0; i < timerValues.size(); i++){
+    std::cout << timerValues[i] << "\n";
+  }
+  
 
   return 0;
 }

@@ -4,12 +4,17 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <array>
 
 #include "board.h"
 
 using std::string;
 using std::vector;
+using std::array;
 using std::pair;
+
+//tools for all the days
+vector <string> getData(string filename);
 
 //day 1
 vector <int> getData1(string filename);
@@ -29,3 +34,15 @@ vector<string> getData4(string filename);
 vector<int> getNumbers(string data);
 vector<Board> getBoards(vector<string> data);
 vector<vector<vector<int>>> tryBoards(vector<string> data);
+
+//day5
+vector<pair<pair<int,int>,pair<int,int>>> getEndpoints(vector<string> data);
+vector<vector<pair<int,int>>> getVentLines(vector<pair<pair<int,int>,pair<int,int>>> endpoints);
+void markVentLines(int x_size, int y_size, int chart[], vector<vector<pair<int,int>>> lines);
+int getDangerZone (int x_size, int y_size, int chart[]);
+vector<vector<pair<int,int>>> addDiagVentLines(vector<vector<pair<int,int>>> lines,vector<pair<pair<int,int>,pair<int,int>>> endPoints);
+
+//day6
+vector<int> getInitTimers(vector<string> data);
+vector<vector<int>> getDailyTimers(vector<int> timers, int days);
+vector<int> oneDayLater(vector<int> timers);
