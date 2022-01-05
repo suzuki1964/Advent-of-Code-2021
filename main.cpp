@@ -242,19 +242,35 @@ for (int i = 0; i < 3; i++){
   }
   */
   
-  //Day 6
-  vector<string> fishData = getData("test6.txt");//this is just one string
+  //Day 6, Part 1
+  //vector<string> fishData = getData("test6.txt");//this is to run test case
+  vector<string> fishData = getData("Day6-input.txt");//the data is just one string
+
   //parse the string into numbers which give the timer values for each fish on the initial day
   vector<int> timerValues = getInitTimers(fishData);
-  //each line (vector) represents the timers of all the fish that day and days is the number of days you want to check
-  vector<vector<int>> dailyTimerValues = getDailyTimers(timerValues, days);
-  
-  
 
+  //each line (vector) represents the timers of all the fish that day and numberOfDays is the number of days you want to check
+  //so, dailyTimerValues[0] is the set of initial timer values
+  //int numberOfDays = 18; //easier to toggle between the two values 18 and 80
+  int numberOfDays = 80;
+  vector<vector<int>> dailyTimerValues = getDailyTimers(timerValues, numberOfDays);
+  std::cout << "total number of fish " << dailyTimerValues[numberOfDays].size();
+  
+  /*
+  //check daily timer values
+  for (int i = 0; i < dailyTimerValues.size(); i++){
+    for (int j = 0; j < dailyTimerValues[i].size(); j++){
+      std::cout << dailyTimerValues[i][j] << " ";
+    }
+    std::cout << "\n";
+  }
+  */
+/*
+//check the initial timer values
   for (int i = 0; i < timerValues.size(); i++){
     std::cout << timerValues[i] << "\n";
   }
-  
+  */
 
   return 0;
 }
