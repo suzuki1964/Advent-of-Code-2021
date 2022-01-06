@@ -249,13 +249,15 @@ for (int i = 0; i < 3; i++){
    std::cout << "\n";
   }
 */
-  
+
+/*  
 //Day 6, Part 1
   //vector<string> fishData = getData("test6.txt");//this is to run test case
   vector<string> fishData = getData("Day6-input.txt");//the data is just one string
 
   //parse the string into numbers which give the timer values for each fish on the initial day
   vector<int> timerValues = getInitTimers(fishData);
+*/
 
 /*
   //each line (vector) represents the timers of all the fish that day and numberOfDays is the number of days you want to check
@@ -307,6 +309,7 @@ for (int i = 0; i < 3; i++){
   }
 */
 
+/*
 //Day 7, Part 1
   //vector<string> crabData = getData("test7.txt");//this is to run test case
   vector<string> crabData = getData("Day7-input.txt");//a vector of horizontal positions
@@ -316,6 +319,7 @@ for (int i = 0; i < 3; i++){
   int fuelCost = getFuelCost(xPosition, crabPositions);
   int minFuel = findMinFuel(crabPositions);
   std::cout << "fuel cost " << minFuel << "\n";
+*/
 
 /*
 for (int i = 0; i < crabPositions.size(); i++){
@@ -324,11 +328,35 @@ for (int i = 0; i < crabPositions.size(); i++){
 std::cout << "\n";
 */
 
+/*
 //Day 7, Part 2
   int newFuel = getNewFuelCost(xPosition, crabPositions);
   int newMinFuel = findNewMinFuel(crabPositions);
   std::cout << "new min fuel " << newMinFuel << "\n";
+*/
 
+//Day 8, Part 1
+  //vector<string> sensorData = getData("test8.txt");//this is to run test case
+  vector<string> sensorData = getData("Day8-input.txt");//the data is a list of the signal patterns for the 10 digits, followed by the delimiter |, then the signal patterns of the four-digit output
+
+  //parse the strings into a list of the patterns for the 10 digits and a list of the patterns for the outputs
+  vector<pair<vector<string>,vector<string>>> sensorDisplays = getSensorDisplays(sensorData);
+
+  //find the patterns for 1,4,7,and 8 (the ones with length 2,3,4, and 7) in the outputs
+  int easyDigits = findEasyDigits(sensorDisplays);
+  std::cout << easyDigits;
+/*
+  for (int i = 0; i < sensorDisplays.size(); i++){
+    std::cout << i << ": " ;
+    for (int j = 0; j < sensorDisplays[i].first.size(); j++){
+      std::cout << sensorDisplays[i].first[j] << " ";
+    }
+    std::cout << "| ";
+    for (int j = 0; j < sensorDisplays[i].second.size(); j++){
+      std::cout << sensorDisplays[i].second[j] << " ";
+    }
+  }
+*/
 
   return 0;
 }

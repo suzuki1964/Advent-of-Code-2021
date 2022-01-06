@@ -60,3 +60,7 @@ int findMinFuel(vector<int> crabPositions);
 //Part 2
 int getNewFuelCost(int xValue, vector<int> positions);
 int findNewMinFuel(vector<int> positions);
+
+//day8
+vector<pair<vector<string>,vector<string>>> getSensorDisplays(vector<string> data);
+int findEasyDigits(vector<pair<vector<string>,vector<string>>> displays);
