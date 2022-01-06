@@ -13,7 +13,7 @@ using std::pair;
 int main() {
   string datafolder = "datafiles/";
   
-  /*
+/*
   //Day 1
   // Create a vector to hold the depths, a variable to count the number of times the depth increases, and a variable to count the number of times the three measurement sum increases
   string line;
@@ -22,7 +22,7 @@ int main() {
   int countDepthInc = 0;//count the number of times the depth increases
   int countSumInc = 0;//count the number of times the three-measurement sum increases
 
-//vector<string> depthData = getData("Day1-input.txt");//vector of the depths as strings
+  //vector<string> depthData = getData("Day1-input.txt");//vector of the depths as strings
   depths = getData1("Day1-input.txt");
  
   countDepthInc = countIncreases(1, depths);
@@ -44,6 +44,7 @@ int main() {
   subPosition = newLocation(commands);
   std::cout << "The submarine is at " << subPosition << ".\n";
 */
+
 /*
   //Day 3
   vector<string> binaryData = getData("Day3-input.txt");//vector of the binary numbers
@@ -116,6 +117,7 @@ int main() {
   int score = 0;
   int whichBoard = 0;
   bool won = false;
+*/
 
 //Part 1
 /*
@@ -137,6 +139,7 @@ int main() {
     i++;
   }
 */
+
 /*
   //Part 2
   
@@ -164,9 +167,9 @@ int main() {
     i++;
   }
   std::cout << "Day 4, Part 2: score " << score <<"\n";
-  */
+*/
 
- /* print out boards to make sure they loaded in properly
+/* print out boards to make sure they loaded in properly
   for (int i = 0; i < bingoBoards.size(); i++){
     std::cout << "new board \n";
     for (int row = 0; row < 5; row++){
@@ -176,10 +179,10 @@ int main() {
       std::cout << "\n";
     }
   }
-  */
+*/
 
-//to test parsing of data into bingo boards
 /*
+//to test parsing of data into bingo boards
 bingoBoardVectors = tryBoards(bingoData);
 for (int i = 0; i < 3; i++){
   std::cout << "new board\n";
@@ -191,9 +194,10 @@ for (int i = 0; i < 3; i++){
   }
 }
 */
+
 /*
 //Day 5
-//vector of strings of the form 427,523 -> 427,790 which give the endpoints of the lines of vents
+  //vector of strings of the form 427,523 -> 427,790 which give the endpoints of the lines of vents
   vector<string> binaryData = getData("Day5-input.txt");
   //vector of the endpoints of the lines and the last pair is (0,0) and (x-maximum, y_maximum)
   vector<pair<pair<int,int>, pair<int,int>>> ventEndpoints = getEndpoints(binaryData);
@@ -208,7 +212,9 @@ for (int i = 0; i < 3; i++){
   //the number of points where at least two vent lines overlap
   int dangerZone = getDangerZone(ventEndpoints[ventEndpoints.size()-1].second.first, ventEndpoints[ventEndpoints.size()-1].second.second, ventChart);
   std::cout << "Danger zone with horizontal and vertical lines is " << dangerZone << "\n";
+*/
 
+/*
 //Part 2 
  //add the diagonal lines too
   vector<vector<pair<int,int>>> ventHVDLines = addDiagVentLines(ventHVLines,ventEndpoints);
@@ -216,12 +222,14 @@ for (int i = 0; i < 3; i++){
   //the number of points where at least two vent lines overlap
   int dangerZoneAll = getDangerZone(ventEndpoints[ventEndpoints.size()-1].second.first, ventEndpoints[ventEndpoints.size()-1].second.second, ventChart);
   std::cout << "Danger zone with horizontal, vertical, and diagonal lines is " << dangerZoneAll << "\n";
-  /*
+*/
+
+/*
   //print out the pairs of endpoints to make sure it was parsed correctly with the test case
   for (int i = 0; i < ventEndpoints.size(); i++){
     std::cout << "(" << ventEndpoints[i].first.first << ", " << ventEndpoints[i].first.second << ") (" << ventEndpoints[i].second.first << ", " << ventEndpoints[i].second.second << ") \n";
   }
-  */
+*/
 
 /*
   //print out the points on the lines to make sure it was done correctly
@@ -230,9 +238,9 @@ for (int i = 0; i < 3; i++){
       std::cout << "(" << ventHVDLines[i][j].first << ", " << ventHVDLines[i][j].second << ") " << "line " << i << ", point " << j << "\n";
     }
   }
-  */
+*/
 
-  /*
+/*
   //print out the graph of the lines to check the test case
   for (int i = 0; i <= ventEndpoints[ventEndpoints.size()-1].second.second; i++){
    for (int j = 0; j <= ventEndpoints[ventEndpoints.size()-1].second.first; j++){
@@ -240,23 +248,46 @@ for (int i = 0; i < 3; i++){
    }
    std::cout << "\n";
   }
-  */
+*/
   
-  //Day 6, Part 1
+//Day 6, Part 1
   //vector<string> fishData = getData("test6.txt");//this is to run test case
   vector<string> fishData = getData("Day6-input.txt");//the data is just one string
 
   //parse the string into numbers which give the timer values for each fish on the initial day
   vector<int> timerValues = getInitTimers(fishData);
 
+/*
   //each line (vector) represents the timers of all the fish that day and numberOfDays is the number of days you want to check
   //so, dailyTimerValues[0] is the set of initial timer values
   //int numberOfDays = 18; //easier to toggle between the two values 18 and 80
   int numberOfDays = 80;
   vector<vector<int>> dailyTimerValues = getDailyTimers(timerValues, numberOfDays);
   std::cout << "total number of fish " << dailyTimerValues[numberOfDays].size();
-  
-  /*
+*/
+
+//Part 2
+  //too inefficient. No need to store all the previous days' timer values. 
+  //In fact, for each day, you only need to know how many fish have which timer value.
+  vector<vector<int>> timerFishNumbers = sortByTimer(timerValues);//number of fish can be large, so we use a vector<int> to hold the number, stored so that the digit in the ith place represents 10^i
+  int numberOfDays = 256;
+  vector<vector<int>> fishByTimer = fishOnDayGiven(timerFishNumbers, numberOfDays);
+
+  vector<int> total = totalFish(fishByTimer);
+  //print out number in the normal way, so we need to reverse the digits
+  std::cout << "After " << numberOfDays << " days, there are ";
+  for (int i = 0; i < total.size(); i++){
+    std::cout << total[total.size() - i - 1];
+  }
+  std::cout << " fish\n";
+/*
+//check if properly sorted by timer values
+  for (int i = 0; i < 9; i++){
+    std::cout << "timer " << i << " has " << fishByTimer[i][0] << " fish\n";
+  }
+*/
+
+/*
   //check daily timer values
   for (int i = 0; i < dailyTimerValues.size(); i++){
     for (int j = 0; j < dailyTimerValues[i].size(); j++){
@@ -264,13 +295,14 @@ for (int i = 0; i < 3; i++){
     }
     std::cout << "\n";
   }
-  */
+*/
+
 /*
-//check the initial timer values
+  //check the initial timer values
   for (int i = 0; i < timerValues.size(); i++){
     std::cout << timerValues[i] << "\n";
   }
-  */
+*/
 
   return 0;
 }

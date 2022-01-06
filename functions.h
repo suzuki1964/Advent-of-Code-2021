@@ -46,3 +46,8 @@ vector<vector<pair<int,int>>> addDiagVentLines(vector<vector<pair<int,int>>> lin
 vector<int> getInitTimers(vector<string> data);
 vector<vector<int>> getDailyTimers(vector<int> timers, int days);
 vector<int> oneDayLater(vector<int> timers);
+//Part 2
+vector<int> addNumbers(vector<int> firstNumber, vector<int> secondNumber);
+vector<vector<int>> sortByTimer(vector<int> timers);
+vector<vector<int>> fishOnDayGiven(vector<vector<int>> fishByTimer, int day);
+vector<int> totalFish(vector<vector<int>> fishNumbers);
