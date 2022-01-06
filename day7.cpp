@@ -42,7 +42,23 @@ int findMinFuel(vector<int> positions){
 return fuel;
 }
 
-/*
-  int bottomEnd = 0;
-  int midPoint = findMidpoint(bottomEnd, topEnd);
-  */
+int getNewFuelCost(int xValue, vector<int> positions){
+  int fuel = 0;
+  for (int i = 0; i < positions.size(); i++){
+    int distance = std::abs(xValue - positions[i]);
+    fuel += (distance * (distance + 1)/2);
+  }
+  return fuel;
+}
+
+int findNewMinFuel(vector<int> positions){
+  int maxPos = findMax(positions);
+  int fuel = getNewFuelCost(maxPos, positions);
+  for (int i = 0; i < maxPos; i++){
+    int fuelCost = getNewFuelCost(i, positions);
+    if (fuelCost < fuel){
+      fuel = fuelCost;
+    }
+  }
+return fuel;
+}

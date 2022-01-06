@@ -57,3 +57,6 @@ vector<int> getCrabPositions(vector<string> data);
 int findMax(vector<int> xPositions);
 int getFuelCost(int xValue, vector<int> positions);
 int findMinFuel(vector<int> crabPositions);
+//Part 2
+int getNewFuelCost(int xValue, vector<int> positions);
+int findNewMinFuel(vector<int> positions);

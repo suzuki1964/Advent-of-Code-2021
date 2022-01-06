@@ -312,7 +312,7 @@ for (int i = 0; i < 3; i++){
   vector<string> crabData = getData("Day7-input.txt");//a vector of horizontal positions
   vector<int> crabPositions = getCrabPositions(crabData);
   int maxPosition = findMax(crabPositions);
-  int xPosition = 10;
+  int xPosition = 5;
   int fuelCost = getFuelCost(xPosition, crabPositions);
   int minFuel = findMinFuel(crabPositions);
   std::cout << "fuel cost " << minFuel << "\n";
@@ -323,6 +323,12 @@ for (int i = 0; i < crabPositions.size(); i++){
 }
 std::cout << "\n";
 */
+
+//Day 7, Part 2
+  int newFuel = getNewFuelCost(xPosition, crabPositions);
+  int newMinFuel = findNewMinFuel(crabPositions);
+  std::cout << "new min fuel " << newMinFuel << "\n";
+
 
   return 0;
 }
