@@ -266,6 +266,7 @@ for (int i = 0; i < 3; i++){
   std::cout << "total number of fish " << dailyTimerValues[numberOfDays].size();
 */
 
+/*
 //Part 2
   //too inefficient. No need to store all the previous days' timer values. 
   //In fact, for each day, you only need to know how many fish have which timer value.
@@ -280,6 +281,8 @@ for (int i = 0; i < 3; i++){
     std::cout << total[total.size() - i - 1];
   }
   std::cout << " fish\n";
+*/
+
 /*
 //check if properly sorted by timer values
   for (int i = 0; i < 9; i++){
@@ -302,6 +305,23 @@ for (int i = 0; i < 3; i++){
   for (int i = 0; i < timerValues.size(); i++){
     std::cout << timerValues[i] << "\n";
   }
+*/
+
+//Day 7, Part 1
+  //vector<string> crabData = getData("test7.txt");//this is to run test case
+  vector<string> crabData = getData("Day7-input.txt");//a vector of horizontal positions
+  vector<int> crabPositions = getCrabPositions(crabData);
+  int maxPosition = findMax(crabPositions);
+  int xPosition = 10;
+  int fuelCost = getFuelCost(xPosition, crabPositions);
+  int minFuel = findMinFuel(crabPositions);
+  std::cout << "fuel cost " << minFuel << "\n";
+
+/*
+for (int i = 0; i < crabPositions.size(); i++){
+  std::cout << crabPositions[i] << " ";
+}
+std::cout << "\n";
 */
 
   return 0;

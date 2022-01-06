@@ -51,3 +51,9 @@ vector<int> addNumbers(vector<int> firstNumber, vector<int> secondNumber);
 vector<vector<int>> sortByTimer(vector<int> timers);
 vector<vector<int>> fishOnDayGiven(vector<vector<int>> fishByTimer, int day);
 vector<int> totalFish(vector<vector<int>> fishNumbers);
+
+//day7
+vector<int> getCrabPositions(vector<string> data);
+int findMax(vector<int> xPositions);
+int getFuelCost(int xValue, vector<int> positions);
+int findMinFuel(vector<int> crabPositions);
