@@ -64,3 +64,6 @@ int findNewMinFuel(vector<int> positions);
 //day8
 vector<pair<vector<string>,vector<string>>> getSensorDisplays(vector<string> data);
 int findEasyDigits(vector<pair<vector<string>,vector<string>>> displays);
+int findOutputSum(vector<pair<vector<string>,vector<string>>> displays);
+string segmentsOn(vector<string> displays, int numberOn);
+bool isContainedIn(string key, string display);

@@ -344,7 +344,8 @@ std::cout << "\n";
 
   //find the patterns for 1,4,7,and 8 (the ones with length 2,3,4, and 7) in the outputs
   int easyDigits = findEasyDigits(sensorDisplays);
-  std::cout << easyDigits;
+  std::cout << easyDigits << " easy digits\n";
+
 /*
   for (int i = 0; i < sensorDisplays.size(); i++){
     std::cout << i << ": " ;
@@ -356,6 +357,16 @@ std::cout << "\n";
       std::cout << sensorDisplays[i].second[j] << " ";
     }
   }
+*/
+
+//Day 8, Part 2
+//To decode the patterns, you only need to check for two pairs: the one from 1, and the extra ones in 4.
+
+int sum = findOutputSum(sensorDisplays);
+std::cout << "sum " << sum << "\n";
+
+/*
+int sum = findOutputSum(sensorDisplays);
 */
 
   return 0;
