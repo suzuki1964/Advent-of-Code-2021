@@ -371,11 +371,27 @@ std::cout << "\n";
   int sum = findOutputSum(sensorDisplays);
   */
 
-//Day 9, Part 1
+//Day 9, Part 1 and Part 2
   //vector<string> floorData = getData("test9.txt");//this is to run test case
   vector<string> floorData = getData("Day9-input.txt");//the data is a list of the floor heights (from 0 to 9)
-  int riskLevel = getRiskLevel(floorData);
+  vector<vector<pair<int,int>>> floorHeights = getFloorHeights(floorData); 
+
+  vector<int> basinSizes;
+  int riskLevel = getRiskLevel(floorHeights, basinSizes);
   std::cout << "risk " << riskLevel << "\n";
+  int riskProduct = getRiskProduct(basinSizes);
+  std::cout << "product " << riskProduct << "\n";
+
+/* to check the map of the basins
+  for (int i = 0; i < floorHeights.size(); ++i){
+    for (int j = 0; j < floorHeights[i].size(); ++j){
+      std::cout << floorHeights[i][j].second << " ";
+    }
+    std::cout << "\n";
+  }
+*/
+
+//Day 10
 
   return 0;
 }

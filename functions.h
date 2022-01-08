@@ -69,4 +69,8 @@ string segmentsOn(vector<string> displays, int numberOn);
 bool isContainedIn(string key, string display);
 
 //day9
-int getRiskLevel(vector<string>);
+vector<vector<pair<int,int>>> getFloorHeights(vector<string> data);
+int getRiskLevel(vector<vector<pair<int,int>>> &heights, vector<int> &sizes);
+bool isLowPoint(int x, int y, vector<string> heights);
+int markBasin(int x,int y,int basin,int &size,vector<vector<pair<int,int>>> &heights);
+int getRiskProduct(vector<int> sizes);
