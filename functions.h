@@ -67,3 +67,6 @@ int findEasyDigits(vector<pair<vector<string>,vector<string>>> displays);
 int findOutputSum(vector<pair<vector<string>,vector<string>>> displays);
 string segmentsOn(vector<string> displays, int numberOn);
 bool isContainedIn(string key, string display);
+
+//day9
+int getRiskLevel(vector<string>);

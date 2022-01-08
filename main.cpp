@@ -335,6 +335,7 @@ std::cout << "\n";
   std::cout << "new min fuel " << newMinFuel << "\n";
 */
 
+/*
 //Day 8, Part 1
   //vector<string> sensorData = getData("test8.txt");//this is to run test case
   vector<string> sensorData = getData("Day8-input.txt");//the data is a list of the signal patterns for the 10 digits, followed by the delimiter |, then the signal patterns of the four-digit output
@@ -345,6 +346,7 @@ std::cout << "\n";
   //find the patterns for 1,4,7,and 8 (the ones with length 2,3,4, and 7) in the outputs
   int easyDigits = findEasyDigits(sensorDisplays);
   std::cout << easyDigits << " easy digits\n";
+*/
 
 /*
   for (int i = 0; i < sensorDisplays.size(); i++){
@@ -361,13 +363,19 @@ std::cout << "\n";
 
 //Day 8, Part 2
 //To decode the patterns, you only need to check for two pairs: the one from 1, and the extra ones in 4.
-
-int sum = findOutputSum(sensorDisplays);
-std::cout << "sum " << sum << "\n";
-
 /*
-int sum = findOutputSum(sensorDisplays);
+  int sum = findOutputSum(sensorDisplays);
+  std::cout << "sum " << sum << "\n";
 */
+  /*
+  int sum = findOutputSum(sensorDisplays);
+  */
+
+//Day 9, Part 1
+  //vector<string> floorData = getData("test9.txt");//this is to run test case
+  vector<string> floorData = getData("Day9-input.txt");//the data is a list of the floor heights (from 0 to 9)
+  int riskLevel = getRiskLevel(floorData);
+  std::cout << "risk " << riskLevel << "\n";
 
   return 0;
 }
