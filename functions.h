@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <stack>
 
 #include "board.h"
 
@@ -12,6 +13,7 @@ using std::string;
 using std::vector;
 using std::array;
 using std::pair;
+using std::stack;
 
 //tools for all the days
 vector <string> getData(string filename);
@@ -74,3 +76,8 @@ int getRiskLevel(vector<vector<pair<int,int>>> &heights, vector<int> &sizes);
 bool isLowPoint(int x, int y, vector<string> heights);
 int markBasin(int x,int y,int basin,int &size,vector<vector<pair<int,int>>> &heights);
 int getRiskProduct(vector<int> sizes);
+
+//day10
+vector<char> getSyntaxErrors(vector<string> data);
+bool isOpen(char c);
+int getScore(vector<char> syntaxErrors);

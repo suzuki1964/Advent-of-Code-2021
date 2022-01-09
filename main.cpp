@@ -17,13 +17,13 @@ int main() {
   //Day 1
   // Create a vector to hold the depths, a variable to count the number of times the depth increases, and a variable to count the number of times the three measurement sum increases
   string line;
-  vector<string> depthData = getData("Day3-input.txt");//vector of the depths as strings
+  vector<string> depthData = getData("Day01-input.txt");//vector of the depths as strings
   vector<int> depths;
   int countDepthInc = 0;//count the number of times the depth increases
   int countSumInc = 0;//count the number of times the three-measurement sum increases
 
-  //vector<string> depthData = getData("Day1-input.txt");//vector of the depths as strings
-  depths = getData1("Day1-input.txt");
+  //vector<string> depthData = getData("Day01-input.txt");//vector of the depths as strings
+  depths = getData1("Day01-input.txt");
  
   countDepthInc = countIncreases(1, depths);
   countSumInc = countIncreases(3, depths);
@@ -31,7 +31,7 @@ int main() {
   std::cout << "The three measurement sum increases " << countSumInc << " times.\n";
 
   //Day 2
-  vector<string> commandData = getData2("Day2-input.txt");//a vector of commands of the form "forward 5"
+  vector<string> commandData = getData2("Day02-input.txt");//a vector of commands of the form "forward 5"
   vector<std::pair <string,int>> commands;//each pair is forward/up/down and the integer
   int split_pos = 0;//index of the space between the direction and the integer
   int subPosition = 0;//is the product of the horizontal position and the depth of the submarine
@@ -47,7 +47,7 @@ int main() {
 
 /*
   //Day 3
-  vector<string> binaryData = getData("Day3-input.txt");//vector of the binary numbers
+  vector<string> binaryData = getData("Day03-input.txt");//vector of the binary numbers
   vector<int> sums;//sum of all the 1s in each column
   vector<int> gammaBits;//each bit is the most common bit in the data (by column)
   vector<int> epsilonBits;//each bit is the least common bit in the data
@@ -107,8 +107,8 @@ int main() {
 
 /*
   //Day 4
-  //vector<string> bingoData = getData4("test4.txt");
-  vector<string> bingoData = getData("Day4-input.txt");//the first entry is the list of draw numbers, and the rest are the boards, each number in a row separated by a space, and the boards separated by empty lines
+  //vector<string> bingoData = getData4("test04.txt");
+  vector<string> bingoData = getData("Day04-input.txt");//the first entry is the list of draw numbers, and the rest are the boards, each number in a row separated by a space, and the boards separated by empty lines
   vector<int> numbersDrawn = getNumbers(bingoData[0]);
   //vector<vector<vector<int>>> bingoBoardVectors; //to test parsing of data into bingo boards
   vector<Board> bingoBoards = getBoards(bingoData);
@@ -130,7 +130,7 @@ int main() {
         //std::cout << "board " << whichBoard << ", (" << bingoBoards[whichBoard].Contains(numbersDrawn[i]).first << ", " << bingoBoards[whichBoard].Contains(numbersDrawn[i]).second << ") \n";
         if (bingoBoards[whichBoard].HasWon(bingoBoards[whichBoard].Contains(numbersDrawn[i]))){
           score = bingoBoards[whichBoard].Points() * numbersDrawn[i];
-          std::cout << "Day4, Part 1: score " << score <<"\n";
+          std::cout << "Day04, Part 1: score " << score <<"\n";
           won = true;
         }
       }
@@ -198,7 +198,7 @@ for (int i = 0; i < 3; i++){
 /*
 //Day 5
   //vector of strings of the form 427,523 -> 427,790 which give the endpoints of the lines of vents
-  vector<string> binaryData = getData("Day5-input.txt");
+  vector<string> binaryData = getData("Day05-input.txt");
   //vector of the endpoints of the lines and the last pair is (0,0) and (x-maximum, y_maximum)
   vector<pair<pair<int,int>, pair<int,int>>> ventEndpoints = getEndpoints(binaryData);
   //vector of a vector of all the points on each horizontal and vertical line
@@ -252,8 +252,8 @@ for (int i = 0; i < 3; i++){
 
 /*  
 //Day 6, Part 1
-  //vector<string> fishData = getData("test6.txt");//this is to run test case
-  vector<string> fishData = getData("Day6-input.txt");//the data is just one string
+  //vector<string> fishData = getData("test06.txt");//this is to run test case
+  vector<string> fishData = getData("Day06-input.txt");//the data is just one string
 
   //parse the string into numbers which give the timer values for each fish on the initial day
   vector<int> timerValues = getInitTimers(fishData);
@@ -311,8 +311,8 @@ for (int i = 0; i < 3; i++){
 
 /*
 //Day 7, Part 1
-  //vector<string> crabData = getData("test7.txt");//this is to run test case
-  vector<string> crabData = getData("Day7-input.txt");//a vector of horizontal positions
+  //vector<string> crabData = getData("test07.txt");//this is to run test case
+  vector<string> crabData = getData("Day07-input.txt");//a vector of horizontal positions
   vector<int> crabPositions = getCrabPositions(crabData);
   int maxPosition = findMax(crabPositions);
   int xPosition = 5;
@@ -337,8 +337,8 @@ std::cout << "\n";
 
 /*
 //Day 8, Part 1
-  //vector<string> sensorData = getData("test8.txt");//this is to run test case
-  vector<string> sensorData = getData("Day8-input.txt");//the data is a list of the signal patterns for the 10 digits, followed by the delimiter |, then the signal patterns of the four-digit output
+  //vector<string> sensorData = getData("test08.txt");//this is to run test case
+  vector<string> sensorData = getData("Day08-input.txt");//the data is a list of the signal patterns for the 10 digits, followed by the delimiter |, then the signal patterns of the four-digit output
 
   //parse the strings into a list of the patterns for the 10 digits and a list of the patterns for the outputs
   vector<pair<vector<string>,vector<string>>> sensorDisplays = getSensorDisplays(sensorData);
@@ -371,9 +371,10 @@ std::cout << "\n";
   int sum = findOutputSum(sensorDisplays);
   */
 
+/*
 //Day 9, Part 1 and Part 2
-  //vector<string> floorData = getData("test9.txt");//this is to run test case
-  vector<string> floorData = getData("Day9-input.txt");//the data is a list of the floor heights (from 0 to 9)
+  //vector<string> floorData = getData("test09.txt");//this is to run test case
+  vector<string> floorData = getData("Day09-input.txt");//the data is a list of the floor heights (from 0 to 9)
   vector<vector<pair<int,int>>> floorHeights = getFloorHeights(floorData); 
 
   vector<int> basinSizes;
@@ -381,6 +382,7 @@ std::cout << "\n";
   std::cout << "risk " << riskLevel << "\n";
   int riskProduct = getRiskProduct(basinSizes);
   std::cout << "product " << riskProduct << "\n";
+*/
 
 /* to check the map of the basins
   for (int i = 0; i < floorHeights.size(); ++i){
@@ -392,6 +394,12 @@ std::cout << "\n";
 */
 
 //Day 10
+  //vector<string> syntaxData = getData("test10.txt");//this is to run test case
+  vector<string> syntaxData = getData("Day10-input.txt");//the data is a list of lines of ()[]{}<>
+  vector<char> syntaxErrors = getSyntaxErrors(syntaxData);
+  int errorScore = getScore(syntaxErrors);
+  std::cout << "score " << errorScore << std::endl;
+  
 
   return 0;
 }

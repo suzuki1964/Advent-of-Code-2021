@@ -1,5 +1,13 @@
 {
   "files": {
+    "datafiles/Day7-input.txt": [
+      {
+        "id": "90ca8dae-cf53-455f-aeaa-f5ed481e8631",
+        "line": 1,
+        "version": 1,
+        "index": 0
+      }
+    ],
     "day8.cpp": [
       {
         "id": "48fca3d2-632a-4e8a-8213-e042bc109792",
