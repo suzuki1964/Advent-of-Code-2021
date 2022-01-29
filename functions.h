@@ -6,6 +6,7 @@
 #include <vector>
 #include <array>
 #include <stack>
+#include <math.h>
 
 #include "board.h"
 
@@ -81,3 +82,8 @@ int getRiskProduct(vector<int> sizes);
 vector<char> getSyntaxErrors(vector<string> data);
 bool isOpen(char c);
 int getScore(vector<char> syntaxErrors);
+vector<vector<char>> getFixes(vector<string> data);
+vector<pair<int,int>> sortByLength(vector<vector<int>> scores);
+vector<vector<int>> getAutoScore(vector<vector<char>> fixes);
+vector<int> getMidScore(vector<pair<int,int>> length, vector<vector<int>> scores);
+vector<int> sortByKey(int key, int &middle, vector<int> list, vector<vector<int>> scores);

@@ -393,13 +393,48 @@ std::cout << "\n";
   }
 */
 
-//Day 10
+
+//Day 10, Part 1
   //vector<string> syntaxData = getData("test10.txt");//this is to run test case
   vector<string> syntaxData = getData("Day10-input.txt");//the data is a list of lines of ()[]{}<>
-  vector<char> syntaxErrors = getSyntaxErrors(syntaxData);
+  vector<char> syntaxErrors = getSyntaxErrors(syntaxData);//this gives the first incorrect character in each corrupted line
   int errorScore = getScore(syntaxErrors);
   std::cout << "score " << errorScore << std::endl;
+
+//Day 10, Part 2
+  vector<vector<char>> fixErrors = getFixes(syntaxData);//each line gives a list of the characters needed to complete all the pairs
+  for (int i = 0; i < fixErrors.size(); ++i){ // print out the fixes
+    for (int j = 0; j < fixErrors[i].size(); ++j){
+      //std::cout << fixErrors[i][j];
+    }
+    //std::cout << std::endl;
+  }
+
+  //the score is represented in base 5 by the above vectors with )=1,]=2,}=3,and >=4. So the autocorrect score can be calculated digit by digit (the numbers are too big for ints), stored from lowest power of ten
+  vector<vector<int>> autoScore = getAutoScore(fixErrors);
+  /* // print out the scores
+  for (int i = 0; i < autoScore.size(); ++i){ // print out the scores
+    for (int j = autoScore[i].size()-1; j >= 0; j--){
+      std::cout << autoScore[i][j];
+    }
+    std::cout << std::endl;
+  }
+  */
   
+  vector<pair<int, int>> lengthOrder = sortByLength(autoScore); //sort scores by number of digits (length), which line it fixes
+  for (int i = 0; i < lengthOrder.size(); ++i){ // print out the scores (digits from the back end)
+      //std::cout << "line " << lengthOrder[i].second << ": " << lengthOrder[i].first << std::endl;
+  }
+  
+  vector<int> score = getMidScore(lengthOrder, autoScore);
+  std::cout << "middle score ";
+  for (int i = 0; i < score.size(); ++i){ // print out the score (digits from the back end)
+    std::cout << score[score.size() - i - 1];
+  }
+  std::cout << std::endl;
+
+
+
 
   return 0;
 }
