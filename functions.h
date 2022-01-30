@@ -87,3 +87,10 @@ vector<pair<int,int>> sortByLength(vector<vector<int>> scores);
 vector<vector<int>> getAutoScore(vector<vector<char>> fixes);
 vector<int> getMidScore(vector<pair<int,int>> length, vector<vector<int>> scores);
 vector<int> sortByKey(int key, int &middle, vector<int> list, vector<vector<int>> scores);
+
+//day11
+array<array<pair<int,bool>,10>,10> getEnergyLevels(vector<string> data);
+array<array<pair<int,bool>,10>,10> addOne(array<array<pair<int,bool>,10>,10> oldLevels, int &flashCount);
+void willFlash(int i,int j,array<array<pair<int,bool>,10>,10> &newLevels,int &flashCount);
+void checkNeighbors(int i,int j,array<array<pair<int,bool>,10>,10> &newLevels,int &flashCount);
+bool inGrid(int i, int j);
