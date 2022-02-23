@@ -485,8 +485,13 @@ std::cout << "\n";
   vector<pair<string, string>> connectedCaves = getPairs(caveData);//these are the edges of the graph
   vector<pair<string, bool>> caveList = getCaves(connectedCaves);//list of caves (nodes) and if they are big
   vector<vector<int>> caveConnections = getConnections(connectedCaves,caveList);//a matrix with 1 where two caves connect
-  vector<vector<string>> pathList = getPaths(caveConnections,caveList);
-/*
+  int twiceCave = 0;
+  //std::cout << "special cave: " << caveList[twiceCave].first << std::endl;
+  vector<vector<string>> pathList = getPaths(caveConnections,caveList,twiceCave);
+  int pathNum = getSpecialPaths(caveConnections, caveList);
+
+  /*
+  std::cout << "special cave number: " << twiceCave << std::endl;
   for (int i = 0; i < pathList.size(); ++i){
     for (int j = 0; j < pathList[i].size(); ++j){
       std::cout << pathList[i][j] << ", ";
@@ -494,8 +499,9 @@ std::cout << "\n";
     std::cout << std::endl;
   }
   */
-    
-  std::cout << "number of paths is " << pathList.size() << std::endl;
+  
+  std::cout << "number of paths is " << pathNum << std::endl;
+  //std::cout << "number of paths is " << pathList.size() << std::endl;
 
 
   return 0;

@@ -102,5 +102,6 @@ vector<pair<string, bool>> getCaves(vector<pair<string,string>> edges);
 bool caveNameInList(string name, vector<pair<string, bool>> list);
 vector<vector<int>> getConnections(vector<pair<string, string>> edges,vector<pair<string, bool>> list);
 int caveIndex(string name,vector<pair<string, bool>> list);
-vector<vector<string>> getPaths(vector<vector<int>> matrix,vector<pair<string, bool>> nodes);
-void getNextCave(int i, vector<vector<int>> matrix, vector<pair<string, bool>> nodes, vector<string> path, vector<vector<string>> &paths);
+vector<vector<string>> getPaths(vector<vector<int>> matrix,vector<pair<string, bool>> nodes, int &twice);
+void getNextCave(int i, vector<vector<int>> matrix, vector<pair<string, bool>> nodes, vector<string> path, vector<vector<string>> &paths, int &twice);
+int getSpecialPaths(vector<vector<int>> matrix, vector<pair<string, bool>> nodes);
