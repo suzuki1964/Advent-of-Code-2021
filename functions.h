@@ -7,6 +7,7 @@
 #include <array>
 #include <stack>
 #include <math.h>
+#include <ctype.h>
 
 #include "board.h"
 
@@ -94,3 +95,12 @@ array<array<pair<int,bool>,10>,10> addOne(array<array<pair<int,bool>,10>,10> old
 void willFlash(int i,int j,array<array<pair<int,bool>,10>,10> &newLevels,int &flashCount);
 void checkNeighbors(int i,int j,array<array<pair<int,bool>,10>,10> &newLevels,int &flashCount);
 bool inGrid(int i, int j);
+
+//day12
+vector<pair<string, string>> getPairs(vector<string> data);
+vector<pair<string, bool>> getCaves(vector<pair<string,string>> edges);
+bool caveNameInList(string name, vector<pair<string, bool>> list);
+vector<vector<int>> getConnections(vector<pair<string, string>> edges,vector<pair<string, bool>> list);
+int caveIndex(string name,vector<pair<string, bool>> list);
+vector<vector<string>> getPaths(vector<vector<int>> matrix,vector<pair<string, bool>> nodes);
+void getNextCave(int i, vector<vector<int>> matrix, vector<pair<string, bool>> nodes, vector<string> path, vector<vector<string>> &paths);

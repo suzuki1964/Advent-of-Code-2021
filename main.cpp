@@ -437,6 +437,7 @@ std::cout << "\n";
   std::cout << std::endl;
 */
 
+/*
 //Day 11, Part 1
   //vector<string> energyData = getData("test11.txt");//this is to run test case
   vector<string> energyData = getData("Day11-input.txt");//the data is a list of 10 lines of 10 digits from 0 to 9
@@ -472,6 +473,30 @@ std::cout << "\n";
     i++;
   }
   std::cout << "first step " << i-1 << std::endl;
+  */
+
+//Day 12, Part 1
+  //vector<string> caveData = getData("test12-1.txt");//this is to run test cases
+  //vector<string> caveData = getData("test12-2.txt");//this is to run test cases
+  //vector<string> caveData = getData("test12-3.txt");//this is to run test cases
+
+  vector<string> caveData = getData("Day12-input.txt");//the data is a list of connected cave pairs like A-c
+  
+  vector<pair<string, string>> connectedCaves = getPairs(caveData);//these are the edges of the graph
+  vector<pair<string, bool>> caveList = getCaves(connectedCaves);//list of caves (nodes) and if they are big
+  vector<vector<int>> caveConnections = getConnections(connectedCaves,caveList);//a matrix with 1 where two caves connect
+  vector<vector<string>> pathList = getPaths(caveConnections,caveList);
+/*
+  for (int i = 0; i < pathList.size(); ++i){
+    for (int j = 0; j < pathList[i].size(); ++j){
+      std::cout << pathList[i][j] << ", ";
+    }
+    std::cout << std::endl;
+  }
+  */
+    
+  std::cout << "number of paths is " << pathList.size() << std::endl;
+
 
   return 0;
 }
