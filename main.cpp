@@ -500,10 +500,10 @@ std::cout << "\n";
 
   pair<vector<pair<int, int>>, vector<pair<bool, int>>> dotsAndFolds = getInstructions(codeData);
   vector<vector<bool>> paperWithDots = markDots(dotsAndFolds.first);
-  //vector<vector<bool>> firstFold = foldY(paperWithDots,7);
-  vector<vector<bool>> firstFold = foldPaper(dotsAndFolds);
+  vector<vector<bool>> firstFold = foldPaper(dotsAndFolds, 1); //1 for first, 0 for all
+  vector<vector<bool>> allFolds = foldPaper(dotsAndFolds, 0); //1 for first, 0 for all
+  showDots(allFolds);
   int numberOfDots = countDots(firstFold);
   std::cout << "number of dots:" << numberOfDots << std::endl;
-  //vector<vector<bool>> secondFold = foldX(firstFold,5);
   return 0;
 }

@@ -113,4 +113,4 @@ void showDots(vector<vector<bool>> paper);
 vector<vector<bool>> foldY(vector<vector<bool>> paper, int y);
 vector<vector<bool>> foldX(vector<vector<bool>> paper, int x);
 int countDots(vector<vector<bool>> paper);
-vector<vector<bool>> foldPaper(pair<vector<pair<int, int>>, vector<pair<bool, int>>> coordsAndInstructions);
+vector<vector<bool>> foldPaper(pair<vector<pair<int, int>>, vector<pair<bool, int>>> coordsAndInstructions, bool folds);//folds=1 for just first, =0 for all folds

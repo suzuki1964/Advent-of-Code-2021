@@ -115,18 +115,27 @@ int countDots(vector<vector<bool>> paper){
   return count;
 }
 
-vector<vector<bool>> foldPaper(pair<vector<pair<int, int>>, vector<pair<bool, int>>> coordsAndInstructions){
+vector<vector<bool>> foldPaper(pair<vector<pair<int, int>>, vector<pair<bool, int>>> coordsAndInstructions, bool folds){ //folds = 1 for just first fold, = 0 for all folds
   vector<pair<int, int>> coords = coordsAndInstructions.first;
   vector<pair<bool, int>> instructions = coordsAndInstructions.second;
   vector<vector<bool>> paper = markDots(coords);
-  vector<vector<bool>> foldedPaper;
-  if (instructions[0].first == true){
-    //std::cout << "x" << std::endl;
-    foldedPaper = foldX(paper,instructions[0].second);
+  int numberOfFolds = 0;
+  if (folds){
+    numberOfFolds = 1;
   }
   else{
-    //std::cout << "y" << std::endl;
-    foldedPaper = foldY(paper,instructions[0].second);
+    numberOfFolds = instructions.size();
+  }
+  vector<vector<bool>> foldedPaper = paper;
+  for (int k = 0; k < numberOfFolds; ++k){
+    if (instructions[k].first == true){
+      //std::cout << "x" << std::endl;
+      foldedPaper = foldX(foldedPaper,instructions[k].second);
+    }
+    else{
+      //std::cout << "y" << std::endl;
+      foldedPaper = foldY(foldedPaper,instructions[k].second);
+    }
   }
   return foldedPaper;
 }
