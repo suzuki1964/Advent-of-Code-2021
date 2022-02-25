@@ -474,7 +474,7 @@ std::cout << "\n";
   }
   std::cout << "first step " << i-1 << std::endl;
   */
-
+/*
 //Day 12, Part 1
   //vector<string> caveData = getData("test12-1.txt");//this is to run test cases
   //vector<string> caveData = getData("test12-2.txt");//this is to run test cases
@@ -489,20 +489,21 @@ std::cout << "\n";
   //std::cout << "special cave: " << caveList[twiceCave].first << std::endl;
   vector<vector<string>> pathList = getPaths(caveConnections,caveList,twiceCave);
   int pathNum = getSpecialPaths(caveConnections, caveList);
-
-  /*
-  std::cout << "special cave number: " << twiceCave << std::endl;
-  for (int i = 0; i < pathList.size(); ++i){
-    for (int j = 0; j < pathList[i].size(); ++j){
-      std::cout << pathList[i][j] << ", ";
-    }
-    std::cout << std::endl;
-  }
-  */
   
   std::cout << "number of paths is " << pathNum << std::endl;
   //std::cout << "number of paths is " << pathList.size() << std::endl;
+*/
 
+//Day 13, Part 1
+  //vector<string> codeData = getData("test13.txt");//this is to run test case
+  vector<string> codeData = getData("Day13-input.txt");//the data is a list of pairs of coordinates, then a list of instructions like "fold along x=655"
 
+  pair<vector<pair<int, int>>, vector<pair<bool, int>>> dotsAndFolds = getInstructions(codeData);
+  vector<vector<bool>> paperWithDots = markDots(dotsAndFolds.first);
+  //vector<vector<bool>> firstFold = foldY(paperWithDots,7);
+  vector<vector<bool>> firstFold = foldPaper(dotsAndFolds);
+  int numberOfDots = countDots(firstFold);
+  std::cout << "number of dots:" << numberOfDots << std::endl;
+  //vector<vector<bool>> secondFold = foldX(firstFold,5);
   return 0;
 }

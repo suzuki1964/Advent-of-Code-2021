@@ -105,3 +105,12 @@ int caveIndex(string name,vector<pair<string, bool>> list);
 vector<vector<string>> getPaths(vector<vector<int>> matrix,vector<pair<string, bool>> nodes, int &twice);
 void getNextCave(int i, vector<vector<int>> matrix, vector<pair<string, bool>> nodes, vector<string> path, vector<vector<string>> &paths, int &twice);
 int getSpecialPaths(vector<vector<int>> matrix, vector<pair<string, bool>> nodes);
+
+//day13
+pair<vector<pair<int, int>>, vector<pair<bool, int>>> getInstructions(vector<string> data);
+vector<vector<bool>> markDots(vector<pair<int, int>> coords);
+void showDots(vector<vector<bool>> paper);
+vector<vector<bool>> foldY(vector<vector<bool>> paper, int y);
+vector<vector<bool>> foldX(vector<vector<bool>> paper, int x);
+int countDots(vector<vector<bool>> paper);
+vector<vector<bool>> foldPaper(pair<vector<pair<int, int>>, vector<pair<bool, int>>> coordsAndInstructions);
