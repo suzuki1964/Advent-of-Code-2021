@@ -114,3 +114,12 @@ vector<vector<bool>> foldY(vector<vector<bool>> paper, int y);
 vector<vector<bool>> foldX(vector<vector<bool>> paper, int x);
 int countDots(vector<vector<bool>> paper);
 vector<vector<bool>> foldPaper(pair<vector<pair<int, int>>, vector<pair<bool, int>>> coordsAndInstructions, bool folds);//folds=1 for just first, =0 for all folds
+
+//day14
+pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>> getPolymers(vector<string> data);
+void addElement(char current, int &last, vector<pair<char,long int>> &list, vector<vector<pair<long int,int>>> &matrix, vector<pair<long int,int>> &row);
+void makeBigger(vector<vector<pair<long int,int>>> &matrix,vector<pair<long int,int>> &row);
+void printMatrix(vector<vector<pair<long int,int>>> matrix);
+int getIndex(char c, vector<pair<char, long int>> list);
+pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>> insertElements(pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>> countsAndInstructions, int steps);
+long int getDifference(vector<pair<char, long int>> list);

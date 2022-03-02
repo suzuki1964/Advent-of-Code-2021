@@ -494,7 +494,8 @@ std::cout << "\n";
   //std::cout << "number of paths is " << pathList.size() << std::endl;
 */
 
-//Day 13, Part 1
+/*
+//Day 13, Parts 1 and 2
   //vector<string> codeData = getData("test13.txt");//this is to run test case
   vector<string> codeData = getData("Day13-input.txt");//the data is a list of pairs of coordinates, then a list of instructions like "fold along x=655"
 
@@ -505,5 +506,24 @@ std::cout << "\n";
   showDots(allFolds);
   int numberOfDots = countDots(firstFold);
   std::cout << "number of dots:" << numberOfDots << std::endl;
+*/
+
+//Day 14, Part 1
+  //vector<string> polymerData = getData("test14.txt");//this is to run test case
+  vector<string> polymerData = getData("Day14-input.txt");
+
+  pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>> elementsAndPairs = getPolymers(polymerData);
+  pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>> newElementsAndPairs = insertElements(elementsAndPairs,40);
+  long int elementDifference = getDifference(newElementsAndPairs.first);
+  
+for (int i = 0; i < newElementsAndPairs.first.size(); ++i){ // print out the scores
+      std::cout << newElementsAndPairs.first[i].first << ", " << newElementsAndPairs.first[i].second << std::endl ;
+    }
+
+  std::cout << elementDifference << std::endl;
+
+
+  
+
   return 0;
 }
