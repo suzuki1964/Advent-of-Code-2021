@@ -508,7 +508,8 @@ std::cout << "\n";
   std::cout << "number of dots:" << numberOfDots << std::endl;
 */
 
-//Day 14, Part 1
+/*
+//Day 14, Parts 1 and 2
   //vector<string> polymerData = getData("test14.txt");//this is to run test case
   vector<string> polymerData = getData("Day14-input.txt");
 
@@ -516,14 +517,30 @@ std::cout << "\n";
   pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>> newElementsAndPairs = insertElements(elementsAndPairs,40);
   long int elementDifference = getDifference(newElementsAndPairs.first);
   
-for (int i = 0; i < newElementsAndPairs.first.size(); ++i){ // print out the scores
+  for (int i = 0; i < newElementsAndPairs.first.size(); ++i){ // print out the scores
       std::cout << newElementsAndPairs.first[i].first << ", " << newElementsAndPairs.first[i].second << std::endl ;
-    }
-
+  }
   std::cout << elementDifference << std::endl;
+*/
 
-
+//Day 15, Part 1
+  //vector<string> riskData = getData("test15.txt");//this is to run test case
+  vector<string> riskData = getData("Day15-input.txt");
   
+  vector<vector<int>> chitonRisk = getChitonLevels(riskData);
+  //printMatrix(chitonRisk);
 
+  vector<vector<pair<int,stack<bool>>>> shortestPath = getPaths(chitonRisk);
+  int x = chitonRisk.size() - 1;
+  std::cout << "(" << x << ", " << x << ") " << shortestPath[x][x].first << std::endl;
+  //printStack(shortestPath[x][x].second);
+/*
+//Day 15, Part 2
+  vector<vector<int>> moreRisk = expandMap(chitonRisk);
+  vector<vector<int>> pathRiskMatrix = pathRisks(moreRisk);
+  int n = pathRiskMatrix.size() - 1;
+  std::cout << "total risk " << pathRiskMatrix[n][n] << std::endl;
+*/
+  
   return 0;
 }

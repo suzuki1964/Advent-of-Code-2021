@@ -13,3 +13,20 @@ vector <string> getData(string filename){
   InputFile.close();
   return inputData;
 }
+
+void printMatrix(vector <vector<int>> matrix){
+  for (int i = 0; i < matrix.size(); ++i){
+    for (int j = 0; j < matrix.size(); ++j){
+      std::cout << matrix[i][j] << " ";
+    }
+    std::cout << std::endl;
+  }
+  std::cout << std::endl;
+}
+
+void printStack(stack<bool> path){
+  while(!path.empty()){
+    std::cout << path.top() << " " ;
+    path.pop();
+  }
+}

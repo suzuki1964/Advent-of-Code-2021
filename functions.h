@@ -123,3 +123,17 @@ void printMatrix(vector<vector<pair<long int,int>>> matrix);
 int getIndex(char c, vector<pair<char, long int>> list);
 pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>> insertElements(pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>> countsAndInstructions, int steps);
 long int getDifference(vector<pair<char, long int>> list);
+
+//day15, Part 1 -- didn't need to know the path
+vector<vector<int>> getChitonLevels(vector<string> data);
+void printMatrix(vector <vector<int>> matrix);
+pair<int,stack<bool>> nextStep(int i, int j, vector<vector<int>> matrix, vector<vector<pair<int,stack<bool>>>> paths);
+void printStack(stack<bool> path);
+vector<vector<pair<int,stack<bool>>>> getPaths(vector<vector<int>> riskMatrix);
+
+//day15, Part 2
+vector<vector<int>> expandMap(vector<vector<int>> matrix);
+vector<vector<int>> increaseRisk(int n);
+int wrapAdd(int i, int j);
+int whichStep(int i, int j, vector<vector<int>> risks, vector<vector<int>> paths);
+vector<vector<int>> pathRisks(vector<vector<int>> risks);
