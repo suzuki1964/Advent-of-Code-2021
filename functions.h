@@ -8,6 +8,7 @@
 #include <stack>
 #include <math.h>
 #include <ctype.h>
+#include <limits.h>
 
 #include "board.h"
 
@@ -127,11 +128,17 @@ long int getDifference(vector<pair<char, long int>> list);
 //day15, Part 1 -- didn't need to know the path
 vector<vector<int>> getChitonLevels(vector<string> data);
 void printMatrix(vector <vector<int>> matrix);
-pair<int,stack<bool>> nextStep(int i, int j, vector<vector<int>> matrix, vector<vector<pair<int,stack<bool>>>> paths);
-void printStack(stack<bool> path);
-vector<vector<pair<int,stack<bool>>>> getPaths(vector<vector<int>> riskMatrix);
+int Day15_1(string filename);
+int dijkstra(vector<vector<int>> chitons);
+vector<vector<pair<int,bool>>> initializeDistances(int size);
+bool isInCavern(int x, int y, int size);
+vector<pair<int,int>> findNeighbors(int x,int y, int size, vector<vector<pair<int,bool>>> &distances);
+pair<int,int> findMin(vector<pair<int, int>> &priority,vector<vector<pair<int,bool>>> &distances);
+int update(vector<pair<int, int>> &priority,vector<vector<pair<int,bool>>> &distances,vector<vector<int>> &chitons);
+bool inPriority(pair<int,int> coords, vector<pair<int, int>> &priority);
 
 //day15, Part 2
+int Day15_2(string filename);
 vector<vector<int>> expandMap(vector<vector<int>> matrix);
 vector<vector<int>> increaseRisk(int n);
 int wrapAdd(int i, int j);

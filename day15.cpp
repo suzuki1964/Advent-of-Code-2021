@@ -1,152 +1,214 @@
 #include "functions.h"
 
-vector<vector<int>> getChitonLevels(vector<string> data){ // data is a bunch of strings of digits
-  vector<int> row;
-  vector <vector<int>> chitons;
-  for (int i = 0; i < data.size(); ++i){
-    for (int j = 0; j < data[i].length(); ++j){
-      row.push_back(data[i][j]-'0');
+vector<vector<int>>
+getChitonLevels(vector<string> data) { // data is a bunch of strings of digits
+	vector<int> row;
+	vector<vector<int>> chitons; // make a matrix with each digit as an entry
+	for (int i = 0; i < data.size(); ++i) {
+		for (int j = 0; j < data[i].length(); ++j) { // turn each string into a row of the matrix
+			row.push_back(data[i][j] - '0'); // turn each digit from the string into an int
+		}
+		chitons.push_back(row);
+		row.clear();
+	}
+	return chitons;
+}
+
+int Day15_1(string filename) {
+	int risk = 0;
+	vector<string> riskData = getData(filename);
+	vector<vector<int>> chitonRisk = getChitonLevels(riskData);
+	//printMatrix(chitonRisk);
+	risk = dijkstra(chitonRisk);
+	return risk;
+}
+
+int dijkstra(vector<vector<int>> chitons) {
+	int pathLength = 0;
+	int matrixSize = chitons.size();
+	vector<vector<pair<int, bool>>> distances = initializeDistances(matrixSize); // set all to infinity except the starting point and set flag to indicated if visited
+  std::cout << distances.size() << " big" << std::endl;
+	vector<pair<int, int>> priorityList; // set up a list of neighbors of visited points
+	priorityList.push_back(std::make_pair(0, 0)); // put the starting point in the priority list
+  std::cout << "starting update " << std::endl;
+	pathLength = update(priorityList, distances, chitons);
+	return pathLength;
+}
+
+vector<vector<pair<int,bool>>> initializeDistances(int size) { // 0 at the start point, infinity elsewhere for the distance and set bool to false to indicate that no point has been visited
+	vector<pair<int,bool>> row;
+	for (int j = 0; j < size; ++j) {
+		row.push_back(std::make_pair(INT_MAX,false));
+	}
+	vector<vector<pair<int,bool>>> maxDistances;
+	for (int i = 0; i < size; ++i) {
+		maxDistances.push_back(row);
+	}
+	maxDistances[0][0] = std::make_pair(0,false);
+	return maxDistances;
+}
+
+vector<pair<int, int>> findNeighbors(int x,int y,int size,vector<vector<pair<int,bool>>> &distances) { // make a list of unvisited neighboring points in the cavern
+	vector<pair<int, int>> neighbors;
+	if ((isInCavern(x - 1, y, size)) && (!distances[x - 1][y].second)) {
+		neighbors.push_back(std::make_pair(x - 1, y));
+	}
+	if ((isInCavern(x + 1, y, size)) && (!distances[x + 1][y].second)) {
+		neighbors.push_back(std::make_pair(x + 1, y));
+	}
+	if ((isInCavern(x, y - 1, size)) && (!distances[x][y - 1].second)) {
+		neighbors.push_back(std::make_pair(x, y - 1));
+	}
+	if ((isInCavern(x, y + 1, size)) && (!distances[x][y + 1].second)) {
+		neighbors.push_back(std::make_pair(x, y + 1));
+	}
+	return neighbors;
+}
+
+bool isInCavern(int x,int y,int size) { // check if the point (x,y) is in the cavern
+	bool isIn = true;
+	if ((x < 0) || (x >= size) || (y < 0) || (y >= size)) {
+		isIn = false;
+	}
+	return isIn;
+}
+
+pair<int, int> findMin(vector<pair<int, int>> &priority, vector<vector<pair<int,bool>>> &distances) {
+	int min = INT_MAX;
+	int x = 0;
+	int y = 0;
+	int index = 0;
+	pair<int,int> coords;
+	for (int i = 0; i < priority.size(); ++i) { // go through priority list and find the closest point not yet visited
+    //std::cout << "(" << priority[i].first << ", " << priority[i].second << ") " << distances[priority[i].first][priority[i].second].first << std::endl;
+		if ((!distances[priority[i].first][priority[i].second].second) && (distances[priority[i].first][priority[i].second].first <= min)) { // this finds the min distance
+			min = distances[priority[i].first][priority[i].second].first;
+			x = priority[i].first;
+			y = priority[i].second;
+			index = i;
+		}
+	}
+	priority.erase(priority.begin() + index); // remove this point from the priority list
+	coords = std::make_pair(x,y);
+	return coords;
+}
+
+bool inPriority(pair<int,int> coords, vector<pair<int, int>> &priority){
+  bool isInList;
+  int x = coords.first;
+  int y = coords.second;
+  for (int i = 0; i < priority.size(); ++i){
+    if ((priority[i].first == x) && (priority[i].second == y)){
+      isInList = true;
     }
-    chitons.push_back(row);
-    row.clear();
   }
-  return chitons;
+  return isInList;
 }
 
-
-pair<int, stack<bool>> nextStep(int i, int j, vector<vector<int>> matrix, vector<vector<pair<int,stack<bool>>>> paths){
-  int width = matrix.size();
-  //std::cout << "(" << i << ", " << j << ") ";
-  bool goRight = false;//true if we should move right, false if we should move down
-  bool movedRight = false;
-  bool movedDown = false;
-  int right = 0;
-  int down = 0;
-  stack<bool> nextPath;
-  pair<int,stack<bool>> nextShort;
-  if (i + 1 < matrix.size()){//moves down and checks if it is still in the cavern
-    movedDown = true;
-    down = matrix[i+1][j] + paths[width - 1 - (i+1)][width - 1 - j].first;
-  }
-  if (j + 1 < matrix.size()){// moves right, checks if in cavern
-    movedRight = true;
-    right = matrix[i][j+1] + paths[width - 1 - i][width - 1 - (j+1)].first;
-  }
-  if (((down >= right) && (movedRight)) || ((down < right) && (!movedDown))){//right gives shorter path or down looks shorter because it's set to 0 since it is out of bounds
-    goRight = true;
-    nextPath = paths[width - 1 - i][width - 1 - (j+1)].second;
-    nextPath.push(goRight);
-    nextShort = make_pair(right,nextPath);
-  }
-  else if (((down > right) && (!movedRight)) || ((down <= right) && (movedDown))){//right looks shorter because it is set to 0 since it is out of bounds or we moved down and it is the shorter path forward
-    nextPath = paths[width - 1 - (i+1)][width - 1 - j].second; //goRight is false since we only moved down
-    nextPath.push(goRight);
-    nextShort = make_pair(down,nextPath);
-  }
-  else{
-    nextShort = make_pair(0,nextPath);
-  }
-  //std::cout << nextShort.first << std::endl;
-  return nextShort;
-}
-
-vector<vector<pair<int,stack<bool>>>> getPaths(vector<vector<int>> riskMatrix){
-  int width = riskMatrix.size();
-  stack<bool> path;
-  pair<int,stack<bool>> initialPair = make_pair(0, path);
-  vector<pair<int,stack<bool>>> row(width, initialPair);
-  vector<vector<pair<int,stack<bool>>>> pathMatrix(width, row);
-  for (int i = 0; i < width; ++i){
-    for (int j = 0; j < width; ++j){
-      pathMatrix[i][j] = nextStep(width - 1 - i, width - 1 - j, riskMatrix, pathMatrix);
+int update(vector<pair<int, int>> &priority,vector<vector<pair<int,bool>>> &distances,vector<vector<int>> &chitons) { //add points checked to visited list, set distances
+	bool done = false;
+	int minDistance = 0;
+	int size = distances.size();
+	pair<int, int> minCoords = findMin(priority,distances); // get an unvisited point at min distance in priority queue
+	int x = minCoords.first;
+	int y = minCoords.second;
+	vector<pair<int, int>> toCheck = findNeighbors(x, y, size,distances); // get a list of unvisited neighbors in cavern
+	std::cout << "check: ";
+	for (int i = 0; i < toCheck.size(); ++i) {
+		if (!inPriority(toCheck[i],priority)) {
+			priority.push_back(toCheck[i]); // add to the priority queue if it isn't there yet
+		}
+		int xCheck = toCheck[i].first;
+		int yCheck = toCheck[i].second;
+		int checkDistance = distances[x][y].first + chitons[xCheck][yCheck]; // add new path distance to distance at min point
+		if (checkDistance < distances[xCheck][yCheck].first) { // if new distance is less, update the distance at the neighbor
+			distances[xCheck][yCheck].first = checkDistance;
+			if ((xCheck == size - 1) && (yCheck == size - 1)) { // if you have reached the endpoint, you are done
+				done = true;
+				minDistance = checkDistance;
+			}
     }
+		std::cout << "(" << xCheck << ", " << yCheck << ") " << distances[xCheck][yCheck].first << std::endl;
   }
-  return pathMatrix;
-}
-
-
-//Day 15, Part 2
-/*
-vector<vector<int>> expandMap(vector<vector<int>> matrix){
-  int size = 5;
-  vector<int> row(matrix.size() * size,0);
-  vector<vector<int>> bigMap(matrix.size() * size,row);
-  
-  for (int i = 0; i < matrix.size(); ++i){ //go through the original matrix
-    for (int j = 0; j < matrix.size(); ++j){
-      vector<vector<int>> addOneToOriginal = increaseRisk(matrix[i][j]); //returns a 5x5 matrix of increased values
-      for (int p = 0; p < size; ++p){ // put these values in the corresponding places in the big matrix
-        for (int q = 0; q < size; ++q){
-          bigMap[(p*matrix.size()) + i][(q*matrix.size()) + j] = addOneToOriginal[p][q];
-        }
+	distances[x][y].second = true; // set the flag to visited
+	//std::cout << "priority: " << priority.size() << std::endl;
+  /*
+  for (int i = 0; i < priority.size(); ++i){
+    std::cout <<  "(" << priority[i].first << ", " << priority[i].second << ") ";
+  }
+  std::cout << std::endl;
+  for (int i = 0; i < distances.size(); ++i){
+    for (int j = 0; j < distances.size(); ++j){
+      if (distances[i][j].first == INT_MAX){
+        std::cout << "*   ";
+      }
+      else if (distances[i][j].first < 10){
+        std::cout << distances[i][j].first << "   " ;
+      }
+      else{
+        std::cout << distances[i][j].first << "  " ;
       }
     }
+    std::cout << std::endl;
   }
-  
-  return bigMap;
+  */
+	if (!done) {
+		minDistance = update(priority, distances, chitons);
+	}
+	return minDistance;
 }
 
-vector<vector<int>> increaseRisk(int n){
-  vector<vector<int>> addOneToRisk;
-  vector<int> row;
-  int size = 5;
-  for (int i = 0; i < size; ++i){
-    int k = wrapAdd(n, i);
-    for (int j = 0; j < size; ++j){
-      int newNum = wrapAdd(k, j);
-      row.push_back(newNum);
-    }
-    addOneToRisk.push_back(row);
-    row.clear();
-  }
-  return addOneToRisk;
+// Day 15, Part 2
+
+int Day15_2(string filename) {
+	int risk = 0;
+	vector<string> riskData = getData(filename);
+	vector<vector<int>> chitonRisk = getChitonLevels(riskData);
+	vector<vector<int>> chitonExpanded = expandMap(chitonRisk);
+	//printMatrix(chitonExpanded);
+	risk = dijkstra(chitonExpanded);
+	return risk;
 }
 
-int wrapAdd(int i, int j){
-  int k = i + j;
-  if (k > 9){
-    k = k - 9;
-  }
-  return k;
+vector<vector<int>> expandMap(vector<vector<int>> matrix) {
+	int multiplier = 5;
+	vector<int> row(matrix.size() * multiplier, 0);
+	vector<vector<int>> bigMap(matrix.size() * multiplier, row);
+	for (int i = 0; i < matrix.size(); ++i) { // go through the original matrix
+		for (int j = 0; j < matrix.size(); ++j) {
+			vector<vector<int>> addOneToOriginal = increaseRisk(
+				matrix[i][j]); // returns a 5x5 matrix of increased values
+			for (int p = 0; p < multiplier; ++p) { // put these values in the corresponding places in the big matrix
+				for (int q = 0; q < multiplier; ++q) {
+					bigMap[(p * matrix.size()) + i][(q * matrix.size()) + j] = addOneToOriginal[p][q];
+				}
+			}
+		}
+	}
+
+	return bigMap;
 }
 
-int whichStep(int i, int j, vector<vector<int>> risks, vector<vector<int>> paths){
-  int pathRisk = 0;
-  int width = risks.size();
-  bool movedRight = false;
-  bool movedDown = false;
-  int right = 0;
-  int down = 0;
-  if (i + 1 < risks.size()){//moves down and checks if it is still in the cavern
-    movedDown = true;
-    down = risks[i+1][j] + paths[width - 1 - (i+1)][width - 1 - j];
-  }
-  if (j + 1 < risks.size()){// moves right, checks if in cavern
-    movedRight = true;
-    right = risks[i][j+1] + paths[width - 1 - i][width - 1 - (j+1)];
-  }
-  if (((down >= right) && (movedRight)) || ((down < right) && (!movedDown))){//right gives shorter path or down looks shorter because it's set to 0 since it is out of bounds
-    pathRisk = right;
-  }
-  else if (((down > right) && (!movedRight)) || ((down <= right) && (movedDown))){//right looks shorter because it is set to 0 since it is out of bounds or we moved down and it is the shorter path forward
-    pathRisk = down;
-  }
-  else{
-    pathRisk = 0;
-  }
-  //std::cout << nextShort.first << std::endl;
-  return pathRisk;
+vector<vector<int>> increaseRisk(int n) {
+	vector<vector<int>> addOneToRisk;
+	vector<int> row;
+	int size = 5;
+	for (int i = 0; i < size; ++i) {
+		int k = wrapAdd(n, i);
+		for (int j = 0; j < size; ++j) {
+			int newNum = wrapAdd(k, j);
+			row.push_back(newNum);
+		}
+		addOneToRisk.push_back(row);
+		row.clear();
+	}
+	return addOneToRisk;
 }
 
-vector<vector<int>> pathRisks(vector<vector<int>> risks){
-  int width = risks.size();
-  vector<int> row(width,0);//initialize a row of zeros
-  vector<vector<int>> pathRiskMatrix(width,row); //initialize a width-by-width matrix of zeros
-  for (int i = 0; i < width; ++i){
-    for (int j = 0; j < width; ++j){
-      pathRiskMatrix[i][j] = whichStep(width - 1 - i, width - 1 - j, risks, pathRiskMatrix);
-    }
-  }
-  return pathRiskMatrix;
+int wrapAdd(int i, int j) {
+	int k = i + j;
+	if (k > 9) {
+		k = k - 9;
+	}
+	return k;
 }
-*/
