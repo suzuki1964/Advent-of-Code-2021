@@ -27,24 +27,20 @@ int dijkstra(vector<vector<int>> chitons) {
 	int pathLength = 0;
 	int matrixSize = chitons.size();
 	vector<vector<pair<int, bool>>> distances = initializeDistances(matrixSize); // set all to infinity except the starting point and set flag to indicated if visited
-  std::cout << distances.size() << " big" << std::endl;
 	vector<pair<int, int>> priorityList; // set up a list of neighbors of visited points
 	priorityList.push_back(std::make_pair(0, 0)); // put the starting point in the priority list
-  std::cout << "starting update " << std::endl;
-	pathLength = update(priorityList, distances, chitons);
+  bool done = false;
+  while (!done){
+    pathLength = update(priorityList, distances, chitons, done);
+  }
 	return pathLength;
 }
 
 vector<vector<pair<int,bool>>> initializeDistances(int size) { // 0 at the start point, infinity elsewhere for the distance and set bool to false to indicate that no point has been visited
-	vector<pair<int,bool>> row;
-	for (int j = 0; j < size; ++j) {
-		row.push_back(std::make_pair(INT_MAX,false));
-	}
-	vector<vector<pair<int,bool>>> maxDistances;
-	for (int i = 0; i < size; ++i) {
-		maxDistances.push_back(row);
-	}
-	maxDistances[0][0] = std::make_pair(0,false);
+  pair<int,bool> initial = std::make_pair(INT_MAX,false); //set the initial values to infinite distance and not visited
+  vector<pair<int,bool>> row(size,initial); //set up the row of the correct length with the initial values
+	vector<vector<pair<int,bool>>> maxDistances(size,row); //fill a matrix of the correct size with the initial values
+	maxDistances[0][0].first = 0;
 	return maxDistances;
 }
 
@@ -80,12 +76,11 @@ pair<int, int> findMin(vector<pair<int, int>> &priority, vector<vector<pair<int,
 	int index = 0;
 	pair<int,int> coords;
 	for (int i = 0; i < priority.size(); ++i) { // go through priority list and find the closest point not yet visited
-    //std::cout << "(" << priority[i].first << ", " << priority[i].second << ") " << distances[priority[i].first][priority[i].second].first << std::endl;
-		if ((!distances[priority[i].first][priority[i].second].second) && (distances[priority[i].first][priority[i].second].first <= min)) { // this finds the min distance
-			min = distances[priority[i].first][priority[i].second].first;
-			x = priority[i].first;
+		if ((!distances[priority[i].first][priority[i].second].second) && (distances[priority[i].first][priority[i].second].first <= min)) { // if it hasn't been visited and its distance is less than the min distance found so far
+			min = distances[priority[i].first][priority[i].second].first; //reset the min distance
+			x = priority[i].first; //store the coordinates
 			y = priority[i].second;
-			index = i;
+			index = i; //store the index
 		}
 	}
 	priority.erase(priority.begin() + index); // remove this point from the priority list
@@ -105,22 +100,18 @@ bool inPriority(pair<int,int> coords, vector<pair<int, int>> &priority){
   return isInList;
 }
 
-int update(vector<pair<int, int>> &priority,vector<vector<pair<int,bool>>> &distances,vector<vector<int>> &chitons) { //add points checked to visited list, set distances
-	bool done = false;
+int update(vector<pair<int, int>> &priority,vector<vector<pair<int,bool>>> &distances,vector<vector<int>> &chitons,bool &done) { //add points checked to visited list, set distances
 	int minDistance = 0;
 	int size = distances.size();
 	pair<int, int> minCoords = findMin(priority,distances); // get an unvisited point at min distance in priority queue
-	int x = minCoords.first;
-	int y = minCoords.second;
-	vector<pair<int, int>> toCheck = findNeighbors(x, y, size,distances); // get a list of unvisited neighbors in cavern
-	std::cout << "check: ";
-	for (int i = 0; i < toCheck.size(); ++i) {
+	vector<pair<int, int>> toCheck = findNeighbors(minCoords.first, minCoords.second, size,distances); // get a list of unvisited neighbors in cavern
+	for (int i = 0; i < toCheck.size(); ++i) { //for each unvisited neighbor
 		if (!inPriority(toCheck[i],priority)) {
 			priority.push_back(toCheck[i]); // add to the priority queue if it isn't there yet
 		}
 		int xCheck = toCheck[i].first;
 		int yCheck = toCheck[i].second;
-		int checkDistance = distances[x][y].first + chitons[xCheck][yCheck]; // add new path distance to distance at min point
+		int checkDistance = distances[minCoords.first][minCoords.second].first + chitons[xCheck][yCheck]; // add new section distance to distance at min point
 		if (checkDistance < distances[xCheck][yCheck].first) { // if new distance is less, update the distance at the neighbor
 			distances[xCheck][yCheck].first = checkDistance;
 			if ((xCheck == size - 1) && (yCheck == size - 1)) { // if you have reached the endpoint, you are done
@@ -128,33 +119,9 @@ int update(vector<pair<int, int>> &priority,vector<vector<pair<int,bool>>> &dist
 				minDistance = checkDistance;
 			}
     }
-		std::cout << "(" << xCheck << ", " << yCheck << ") " << distances[xCheck][yCheck].first << std::endl;
+		std::cout << "(" << xCheck << ", " << yCheck << ") "  << std::endl;
   }
-	distances[x][y].second = true; // set the flag to visited
-	//std::cout << "priority: " << priority.size() << std::endl;
-  /*
-  for (int i = 0; i < priority.size(); ++i){
-    std::cout <<  "(" << priority[i].first << ", " << priority[i].second << ") ";
-  }
-  std::cout << std::endl;
-  for (int i = 0; i < distances.size(); ++i){
-    for (int j = 0; j < distances.size(); ++j){
-      if (distances[i][j].first == INT_MAX){
-        std::cout << "*   ";
-      }
-      else if (distances[i][j].first < 10){
-        std::cout << distances[i][j].first << "   " ;
-      }
-      else{
-        std::cout << distances[i][j].first << "  " ;
-      }
-    }
-    std::cout << std::endl;
-  }
-  */
-	if (!done) {
-		minDistance = update(priority, distances, chitons);
-	}
+	distances[minCoords.first][minCoords.second].second = true; // set the flag to visited
 	return minDistance;
 }
 
@@ -165,7 +132,6 @@ int Day15_2(string filename) {
 	vector<string> riskData = getData(filename);
 	vector<vector<int>> chitonRisk = getChitonLevels(riskData);
 	vector<vector<int>> chitonExpanded = expandMap(chitonRisk);
-	//printMatrix(chitonExpanded);
 	risk = dijkstra(chitonExpanded);
 	return risk;
 }
@@ -174,10 +140,10 @@ vector<vector<int>> expandMap(vector<vector<int>> matrix) {
 	int multiplier = 5;
 	vector<int> row(matrix.size() * multiplier, 0);
 	vector<vector<int>> bigMap(matrix.size() * multiplier, row);
+  vector<vector<vector<int>>> increasedRiskNumbers = increasedNumbersByDigit();
 	for (int i = 0; i < matrix.size(); ++i) { // go through the original matrix
 		for (int j = 0; j < matrix.size(); ++j) {
-			vector<vector<int>> addOneToOriginal = increaseRisk(
-				matrix[i][j]); // returns a 5x5 matrix of increased values
+			vector<vector<int>> addOneToOriginal = increasedRiskNumbers[matrix[i][j]]; //gives a 5x5 matrix of increased values
 			for (int p = 0; p < multiplier; ++p) { // put these values in the corresponding places in the big matrix
 				for (int q = 0; q < multiplier; ++q) {
 					bigMap[(p * matrix.size()) + i][(q * matrix.size()) + j] = addOneToOriginal[p][q];
@@ -185,8 +151,15 @@ vector<vector<int>> expandMap(vector<vector<int>> matrix) {
 			}
 		}
 	}
-
 	return bigMap;
+}
+
+vector<vector<vector<int>>> increasedNumbersByDigit(void){
+  vector<vector<vector<int>>> increasedValues;
+  for (int i = 0; i < 10; ++i){ //for each digit, make a 5x5 matrix of the increased values
+    increasedValues.push_back(increaseRisk(i));
+  }
+  return increasedValues;
 }
 
 vector<vector<int>> increaseRisk(int n) {
