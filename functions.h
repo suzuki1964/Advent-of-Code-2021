@@ -9,6 +9,7 @@
 #include <math.h>
 #include <ctype.h>
 #include <limits.h>
+#include <tuple>
 
 #include "board.h"
 
@@ -148,5 +149,11 @@ vector<vector<vector<int>>> increasedNumbersByDigit(void);
 pair<int,long long int> Day16(string filename);
 string makeBinary(string hexString);
 pair<int, long long int> parseData(string bString);
-pair<pair<int,int>,long long int> getPacket(string bString, int startPos);
+std::tuple<int,int,long long int> getPacket(string bString, int startPos);
 pair<long int,int> getLiterals(string bString,int k);
+
+//day17
+int Day17(string filename);
+vector<pair<int,int>> findRanges(string data);
+pair<int,int> moveOnce(pair<int,int> position, pair<int,int> velocity);
+pair<int,int> updateVelocity(pair<int,int>);

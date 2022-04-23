@@ -624,6 +624,9 @@ int main() {
 	std::cout << "sum of version numbers: " << versionAndValue.first << std::endl;
   std::cout << "expression value: " << versionAndValue.second << std::endl;
 
+  //Day 17
+
+  //int maxHeight = Day17("test17.txt");
   
 	return 0;
 }

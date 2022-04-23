@@ -14,15 +14,14 @@ pair<int, long long int> parseData(string bString){ //read in the packets and ad
   int startPos = 0; //where to start reading in the next packet
   int packetVersion; //the version number of this packet
   int packetLength; //the length of this packet
-  pair<int,int> packetInfo = std::make_pair(packetVersion, packetLength);
-  pair<pair<int,int>, long long int> packetValue = std::make_pair(packetInfo, expressionValue);
+  std::tuple<int,int, long long int> packetValue = std::make_tuple(packetVersion, packetLength, expressionValue);
   packetValue = getPacket(bString, startPos); //read in the packet and return the (version number,packet length) and expression value
-  versionSum += packetValue.first.first;
-  expressionValue = packetValue.second;
+  versionSum += std::get<0>(packetValue);
+  expressionValue = std::get<2>(packetValue);
   return std::make_pair(versionSum,expressionValue);
 }
 
-pair<pair<int,int>,long long int> getPacket(string bString, int k){ //start reading the packet from position k
+std::tuple<int,int,long long int> getPacket(string bString, int k){ //start reading the packet from position k
   string version = bString.substr(k,3); //first 3 bits give the version number
   string type = bString.substr(k+3,3); //next 3 bits give the type ID
   int length = 6; //now we have read in the first 6 bits of the packet
@@ -44,11 +43,11 @@ pair<pair<int,int>,long long int> getPacket(string bString, int k){ //start read
       length += 16; //now we are 16 bits further into the packet
       int readLength = 0; //keep track of how many bits of subpackets we have read
       while (readLength < totalLengthDecimal){
-        pair<pair<int,int>,long long int> packetValue = getPacket(bString, k+length);
-        versionDecimal += packetValue.first.first; //keep a running sum of the version numbers
-        readLength += packetValue.first.second; //add up the number of bits we have read
-        length += packetValue.first.second; //move the starting position to the beginning of the next packet
-        packetNumbers.push_back(packetValue.second); //store the number from the subpacket
+        std::tuple<int,int,long long int> packetValue = getPacket(bString, k+length);
+        versionDecimal += std::get<0>(packetValue); //keep a running sum of the version numbers
+        readLength += std::get<1>(packetValue); //add up the number of bits we have read
+        length += std::get<1>(packetValue); //move the starting position to the beginning of the next packet
+        packetNumbers.push_back(std::get<2>(packetValue)); //store the number from the subpacket
       }
     }
     else { //if the next bit is 1
@@ -57,10 +56,10 @@ pair<pair<int,int>,long long int> getPacket(string bString, int k){ //start read
       length += 12; //we are now 12 more bits into this packet
       int numberOfPackets = 0; //keep track of the number of subpackets read
       for (int i = 0; i < numberOfSubsDecimal; ++i){
-        pair<pair<int,int>, long long int> packetValue = getPacket(bString, k+length);
-        versionDecimal += packetValue.first.first; //keep a running sum of the version numbers
-        length += packetValue.first.second; //move the starting position to the beginning of the next packet
-        packetNumbers.push_back(packetValue.second); //store the number from the subpacket
+        std::tuple<int,int, long long int> packetValue = getPacket(bString, k+length);
+        versionDecimal += std::get<0>(packetValue); //keep a running sum of the version numbers
+        length += std::get<1>(packetValue); //move the starting position to the beginning of the next packet
+        packetNumbers.push_back(std::get<2>(packetValue)); //store the number from the subpacket
       }
     }
     //now evaluate the expression
@@ -110,7 +109,7 @@ pair<pair<int,int>,long long int> getPacket(string bString, int k){ //start read
       }
     }
   }
-  return std::make_pair(std::make_pair(versionDecimal,length), expressionValue);
+  return std::make_tuple(versionDecimal,length,expressionValue);
 }
 
 pair<long int,int> getLiterals(string bString,int k){ //return decimal number and length
