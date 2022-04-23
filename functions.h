@@ -142,6 +142,11 @@ int Day15_2(string filename);
 vector<vector<int>> expandMap(vector<vector<int>> matrix);
 vector<vector<int>> increaseRisk(int n);
 int wrapAdd(int i, int j);
-//int whichStep(int i, int j, vector<vector<int>> risks, vector<vector<int>> paths);
-//vector<vector<int>> pathRisks(vector<vector<int>> risks);
 vector<vector<vector<int>>> increasedNumbersByDigit(void);
+
+//day16
+pair<int,long long int> Day16(string filename);
+string makeBinary(string hexString);
+pair<int, long long int> parseData(string bString);
+pair<pair<int,int>,long long int> getPacket(string bString, int startPos);
+pair<long int,int> getLiterals(string bString,int k);

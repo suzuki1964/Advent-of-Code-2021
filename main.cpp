@@ -576,8 +576,8 @@ int main() {
 
 	/*
 	//Day 14, Parts 1 and 2
-	  //vector<string> polymerData = getData("test14.txt");//this is to run test
-	case vector<string> polymerData = getData("Day14-input.txt");
+	  //vector<string> polymerData = getData("test14.txt");//this is to run test case
+    vector<string> polymerData = getData("Day14-input.txt");
 
 	  pair<vector<pair<char, long int>>, vector<vector<pair<long int,int>>>>
 	elementsAndPairs = getPolymers(polymerData); pair<vector<pair<char, long
@@ -598,16 +598,32 @@ int main() {
 	//int pathChitonRisk = Day15_1("Day15-input.txt");
 
 	//int pathChitonRisk = Day15_2("test15.txt");  //this is to run test case
-	int pathChitonRisk = Day15_2("Day15-input.txt");
-	std::cout << "lowest total risk: " << pathChitonRisk << std::endl;
+	//int pathChitonRisk = Day15_2("Day15-input.txt");
+	//std::cout << "lowest total risk: " << pathChitonRisk << std::endl;
 
-	/*
-	//Day 15, Part 2
-	  vector<vector<int>> moreRisk = expandMap(chitonRisk);
-	  vector<vector<int>> pathRiskMatrix = pathRisks(moreRisk);
-	  int n = pathRiskMatrix.size() - 1;
-	  std::cout << "total risk " << pathRiskMatrix[n][n] << std::endl;
-	*/
+  // Day 16
 
+	//pair<int,long long int> versionAndValue = Day16("test16-1.txt");  //this is to run test case
+	//pair<int,long long int> versionAndValue = Day16("test16-2.txt");  //this is to run test case
+	//pair<int,long long int> versionAndValue = Day16("test16-3.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-4.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-5.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-6.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-7.txt");  //this is to run test case
+
+	//pair<int,long long int> versionAndValue = Day16("test16-8sum.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-8prod.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-8min.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-8max.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-8lt.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-8gt.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-8ne.txt");  //this is to run test case
+  //pair<int,long long int> versionAndValue = Day16("test16-8eq.txt");  //this is to run test case
+  
+	pair<int,long long int> versionAndValue = Day16("Day16-input.txt");
+	std::cout << "sum of version numbers: " << versionAndValue.first << std::endl;
+  std::cout << "expression value: " << versionAndValue.second << std::endl;
+
+  
 	return 0;
 }
