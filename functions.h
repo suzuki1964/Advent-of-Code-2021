@@ -10,6 +10,8 @@
 #include <ctype.h>
 #include <limits.h>
 #include <tuple>
+#include <algorithm>
+#include <stdlib.h>
 
 #include "board.h"
 
@@ -153,7 +155,10 @@ std::tuple<int,int,long long int> getPacket(string bString, int startPos);
 pair<long int,int> getLiterals(string bString,int k);
 
 //day17
-int Day17(string filename);
+pair<int,int> Day17(string filename);
 vector<pair<int,int>> findRanges(string data);
 pair<int,int> moveOnce(pair<int,int> position, pair<int,int> velocity);
 pair<int,int> updateVelocity(pair<int,int>);
+pair<bool,int> hitTarget(pair<int,int> initVelocity,vector<pair<int,int>> range);
+bool inTarget(pair<int,int> position,vector<pair<int,int>> range);
+pair<int,int> maxHeight(vector<pair<int,int>> range);

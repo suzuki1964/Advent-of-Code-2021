@@ -619,14 +619,17 @@ int main() {
   //pair<int,long long int> versionAndValue = Day16("test16-8gt.txt");  //this is to run test case
   //pair<int,long long int> versionAndValue = Day16("test16-8ne.txt");  //this is to run test case
   //pair<int,long long int> versionAndValue = Day16("test16-8eq.txt");  //this is to run test case
-  
+  /*
 	pair<int,long long int> versionAndValue = Day16("Day16-input.txt");
 	std::cout << "sum of version numbers: " << versionAndValue.first << std::endl;
   std::cout << "expression value: " << versionAndValue.second << std::endl;
-
+*/
   //Day 17
 
-  //int maxHeight = Day17("test17.txt");
+  //pair<int,int> maxHeightAndNumber = Day17("test17.txt"); //test case
+  pair<int,int> maxHeightAndNumber = Day17("Day17-input.txt");
+  std::cout << "max height " << maxHeightAndNumber.first << std::endl;
+  std::cout << "count " << maxHeightAndNumber.second << std::endl;
   
 	return 0;
 }
