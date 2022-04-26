@@ -623,13 +623,23 @@ int main() {
 	pair<int,long long int> versionAndValue = Day16("Day16-input.txt");
 	std::cout << "sum of version numbers: " << versionAndValue.first << std::endl;
   std::cout << "expression value: " << versionAndValue.second << std::endl;
-*/
+  */
+  
   //Day 17
 
   //pair<int,int> maxHeightAndNumber = Day17("test17.txt"); //test case
+  /*
   pair<int,int> maxHeightAndNumber = Day17("Day17-input.txt");
   std::cout << "max height " << maxHeightAndNumber.first << std::endl;
   std::cout << "count " << maxHeightAndNumber.second << std::endl;
+  */
+
+  //Day 18
+
+  //pair<int,int> magnitudeAndMax = Day18("test18.txt"); //test case
+  pair<int,int> magnitudeAndMax = Day18("Day18-input.txt");
+  std::cout << "magnitude " << magnitudeAndMax.first << std::endl;
+  std::cout << "max " << magnitudeAndMax.second << std::endl;
   
 	return 0;
 }

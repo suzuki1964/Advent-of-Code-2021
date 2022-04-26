@@ -162,3 +162,14 @@ pair<int,int> updateVelocity(pair<int,int>);
 pair<bool,int> hitTarget(pair<int,int> initVelocity,vector<pair<int,int>> range);
 bool inTarget(pair<int,int> position,vector<pair<int,int>> range);
 pair<int,int> maxHeight(vector<pair<int,int>> range);
+
+//day18
+pair<int,int> Day18(string filename);
+string getSum(vector<string> data);
+int findMag(string number);
+void reduce(string &number);
+int explode(string &number,int i);
+bool willExplode(string &number);
+bool willSplit(string &number);
+pair<pair<int,int>,size_t> findPair(string &number, int i, bool exploding);
+int getMaxMag(vector<string> data);
