@@ -118,40 +118,35 @@ int main() {
 	  //Day 4
 	  //vector<string> bingoData = getData4("test04.txt");
 	  vector<string> bingoData = getData("Day04-input.txt");//the first entry is
-	  the list of draw numbers, and the rest are the boards, each number in a
-	  row separated by a space, and the boards separated by empty lines
+	  //the list of draw numbers, and the rest are the boards, each number in a
+	  //row separated by a space, and the boards separated by empty lines
 	  vector<int> numbersDrawn = getNumbers(bingoData[0]);
-	  //vector<vector<vector<int>>> bingoBoardVectors; //to test parsing of data
-	  into bingo boards vector<Board> bingoBoards = getBoards(bingoData);
+	  //vector<vector<vector<int>>> bingoBoardVectors; //to test parsing of data into bingo boards
+    vector<Board> bingoBoards = getBoards(bingoData);
 
 	  int i = 0;
 	  int score = 0;
 	  int whichBoard = 0;
 	  bool won = false;
-	*/
 
 	// Part 1
-	/*
 	  while (!won && (i < numbersDrawn.size())){
 		whichBoard = 0;
-		while (!won && (whichBoard < bingoBoards.size())){
-		  // if whichBoard contains the number drawn, then mark the tile as
-	  visited and check if you won if
-	  (bingoBoards[whichBoard].Contains(numbersDrawn[i]) != pair(-1,-1)){
-			bingoBoards[whichBoard].SetVisited(bingoBoards[whichBoard].Contains(numbersDrawn[i]));
-			//std::cout << "board " << whichBoard << ", (" <<
-	  bingoBoards[whichBoard].Contains(numbersDrawn[i]).first << ", " <<
-	  bingoBoards[whichBoard].Contains(numbersDrawn[i]).second << ") \n"; if
-	  (bingoBoards[whichBoard].HasWon(bingoBoards[whichBoard].Contains(numbersDrawn[i]))){
-			  score = bingoBoards[whichBoard].Points() * numbersDrawn[i];
-			  std::cout << "Day04, Part 1: score " << score <<"\n";
-			  won = true;
-			}
+		while (!won && (whichBoard < bingoBoards.size())){ // if whichBoard contains the number drawn, then mark the tile as
+	    //visited and check if you won
+      if (bingoBoards[whichBoard].Contains(numbersDrawn[i]) != pair(-1,-1)){
+			  bingoBoards[whichBoard].SetVisited(bingoBoards[whichBoard].Contains(numbersDrawn[i]));
+			  //std::cout << "board " << whichBoard << ", (" << bingoBoards[whichBoard].Contains(numbersDrawn[i]).first << ", " <<  bingoBoards[whichBoard].Contains(numbersDrawn[i]).second << ") \n";
+        if (bingoBoards[whichBoard].HasWon(bingoBoards[whichBoard].Contains(numbersDrawn[i]))){
+			    score = bingoBoards[whichBoard].Points() * numbersDrawn[i];
+			    std::cout << "Day04, Part 1: score " << score <<"\n";
+			    won = true;
+			  }
 		  }
 		  whichBoard++;
 		}
 		i++;
-	  }
+	}
 	*/
 
 	/*
@@ -160,23 +155,20 @@ int main() {
 	 while (i < numbersDrawn.size()){
 		whichBoard = 0;
 		while (whichBoard < bingoBoards.size()){
-		  //if whichBoard contains the number drawn, mark the tile as visited
-	 and check if it won if (bingoBoards[whichBoard].Contains(numbersDrawn[i])
-	 != pair(-1,-1)){
-			bingoBoards[whichBoard].SetVisited(bingoBoards[whichBoard].Contains(numbersDrawn[i]));
-			//std::cout << "board " << whichBoard << ", (" <<
-	 bingoBoards[whichBoard].Contains(numbersDrawn[i]).first << ", " <<
-	 bingoBoards[whichBoard].Contains(numbersDrawn[i]).second << ") \n"; if
-	 (bingoBoards[whichBoard].HasWon(bingoBoards[whichBoard].Contains(numbersDrawn[i]))){
-			  score = bingoBoards[whichBoard].Points() * numbersDrawn[i];
-			  std::cout << "board " << whichBoard <<" score " << score <<"\n";
-			  won = true;
-			  bingoBoards.erase(bingoBoards.begin()+whichBoard);
-			}
+		  //if whichBoard contains the number drawn, mark the tile as visited and check if it won
+      if (bingoBoards[whichBoard].Contains(numbersDrawn[i]) != pair(-1,-1)){
+			  bingoBoards[whichBoard].SetVisited(bingoBoards[whichBoard].Contains(numbersDrawn[i]));
+			  //std::cout << "board " << whichBoard << ", (" << bingoBoards[whichBoard].Contains(numbersDrawn[i]).first << ", << bingoBoards[whichBoard].Contains(numbersDrawn[i]).second << ") \n";
+        if (bingoBoards[whichBoard].HasWon(bingoBoards[whichBoard].Contains(numbersDrawn[i]))){
+			    score = bingoBoards[whichBoard].Points() * numbersDrawn[i];
+			    std::cout << "board " << whichBoard <<" score " << score <<"\n";
+			    won = true;
+			    bingoBoards.erase(bingoBoards.begin()+whichBoard);
+			  }
 		  }
 		  if (won){
-			won = false;
-			whichBoard--;
+			  won = false;
+			  whichBoard--;
 		  }
 		  whichBoard++;
 		}
@@ -635,11 +627,17 @@ int main() {
   */
 
   //Day 18
-
+/*
   //pair<int,int> magnitudeAndMax = Day18("test18.txt"); //test case
   pair<int,int> magnitudeAndMax = Day18("Day18-input.txt");
   std::cout << "magnitude " << magnitudeAndMax.first << std::endl;
   std::cout << "max " << magnitudeAndMax.second << std::endl;
+  */
+  //Day 19
+  //pair<int,int> beaconsAndMax = Day19("test19.txt"); //test case
+  pair<int,int> beaconsAndMax = Day19("Day19-input.txt");
+  std::cout << "beacons " << beaconsAndMax.first << std::endl;
+  std::cout << "max " << beaconsAndMax.second << std::endl;
   
 	return 0;
 }

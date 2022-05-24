@@ -6,6 +6,7 @@
 #include <vector>
 #include <array>
 #include <stack>
+#include <map>
 #include <math.h>
 #include <ctype.h>
 #include <limits.h>
@@ -14,12 +15,14 @@
 #include <stdlib.h>
 
 #include "board.h"
+#include "scanner.h"
 
 using std::string;
 using std::vector;
 using std::array;
 using std::pair;
 using std::stack;
+using std::map;
 
 //tools for all the days
 vector <string> getData(string filename);
@@ -154,7 +157,6 @@ pair<int, long long int> parseData(string bString);
 std::tuple<int,int,long long int> getPacket(string bString, int startPos);
 pair<long int,int> getLiterals(string bString,int k);
 
-//day17
 pair<int,int> Day17(string filename);
 vector<pair<int,int>> findRanges(string data);
 pair<int,int> moveOnce(pair<int,int> position, pair<int,int> velocity);
@@ -163,7 +165,6 @@ pair<bool,int> hitTarget(pair<int,int> initVelocity,vector<pair<int,int>> range)
 bool inTarget(pair<int,int> position,vector<pair<int,int>> range);
 pair<int,int> maxHeight(vector<pair<int,int>> range);
 
-//day18
 pair<int,int> Day18(string filename);
 string getSum(vector<string> data);
 int findMag(string number);
@@ -173,3 +174,15 @@ bool willExplode(string &number);
 bool willSplit(string &number);
 pair<pair<int,int>,size_t> findPair(string &number, int i, bool exploding);
 int getMaxMag(vector<string> data);
+
+pair<int,int> Day19(string filename);
+pair<int,int> findTotalAndMax(vector<string> data);
+vector<Scanner> getScanners(vector<string> data);
+void combineCubes(vector<Scanner> &scannerList,int k);
+vector<pair<int,int>> findOverlaps(vector<Scanner> list, int k, int l);
+void findLocation(vector<pair<int,int>> matchingBeacons, vector<Scanner> &list, int k, int l);
+tuple<int,int,int> addCoords(tuple<int,int,int> coordsOne,tuple<int,int,int> coordsTwo);
+tuple<int,int,int> subtractCoords(tuple<int,int,int> coordsOne,tuple<int,int,int> coordsTwo);
+tuple<pair<int,int>, pair<int,int>, pair<int,int>> findTransformation(tuple<int,int,int> vectorK,tuple<int,int,int> vectorL);
+tuple<int,int,int> transformLtoK(tuple<int,int,int> coords,tuple<pair<int,int>, pair<int,int>, pair<int,int>> transformation);
+void moveBeaconsToK(Scanner scannerK, Scanner scannerL);
