@@ -12,7 +12,6 @@ class Beacon {
     Beacon(int beacon_number);
     void SetBeaconNumber(int i);
     int GetBeaconNumber();
-    void SetBeaconCoords(int x, int y, int z);
     void SetBeaconCoords(tuple<int,int,int> coords);
     tuple<int,int,int> GetBeaconCoords();
   private:
@@ -35,7 +34,6 @@ class Scanner {
     void SetMerged(bool merged);
     bool GetMerged();
     pair<int,int> Contains(int dist); //Scanner k contains beacon m at distance dist from beacon n
-    void AddBeacon(int x, int y, int z);
     void AddBeacon(tuple<int,int,int> coords);
     Beacon GetBeacon(int i);
     bool ContainsBeacon(int x, int y, int z);

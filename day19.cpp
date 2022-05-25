@@ -19,10 +19,6 @@ int Beacon::GetBeaconNumber(){
   return beacon_number_;
 }
 
-void Beacon::SetBeaconCoords(int x, int y, int z){
-  beacon_coords_ = std::make_tuple(x,y,z);
-}
-
 void Beacon::SetBeaconCoords(tuple<int,int,int> coords){
   beacon_coords_ = coords;
 }
@@ -103,14 +99,7 @@ pair<int,int> Scanner::Contains(int dist){ //returns the (a?) pair of beacons di
   return whichBeacons;
 } 
 
-void Scanner::AddBeacon(int x, int y, int z){ //add a beacon to the end of the list
-  int number = beacon_list_.size();
-  Beacon beacon = Beacon(number);
-  beacon.SetBeaconCoords(x,y,z);
-  beacon_list_.push_back(beacon);
-}
-
-void Scanner::AddBeacon(tuple<int,int,int> coords){
+void Scanner::AddBeacon(tuple<int,int,int> coords){ //add a beacon to the end of the list
   int number = beacon_list_.size();
   Beacon beacon = Beacon(number);
   beacon.SetBeaconCoords(coords);
@@ -483,7 +472,8 @@ vector<Scanner> getScanners(vector<string> data){
       int y = stoi(data[i].substr(last_pos,split_pos -last_pos));
       last_pos = split_pos +1;
       int z = stoi(data[i].substr(last_pos));
-      scanner.AddBeacon(x,y,z);
+      tuple<int,int,int> beaconCoords = std::make_tuple(x,y,z);
+      scanner.AddBeacon(beaconCoords);
       ++i;
     }
     int n = scanner.FindNumberOfBeacons();
