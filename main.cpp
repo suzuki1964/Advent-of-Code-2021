@@ -634,10 +634,17 @@ int main() {
   std::cout << "max " << magnitudeAndMax.second << std::endl;
   */
   //Day 19
+  /*
   //pair<int,int> beaconsAndMax = Day19("test19.txt"); //test case
   pair<int,int> beaconsAndMax = Day19("Day19-input.txt");
   std::cout << "beacons " << beaconsAndMax.first << std::endl;
   std::cout << "max " << beaconsAndMax.second << std::endl;
+*/
+  //Day 20
+  pair<int,int> pixelsAndMax = Day20("test20.txt"); //test case
+  //pair<int,int> pixelsAndMax = Day20("Day20-input.txt");
+  std::cout << "2 enhancements " << pixelsAndMax.first << std::endl;
+  std::cout << "50 enhancements " << pixelsAndMax.second << std::endl;
   
 	return 0;
 }

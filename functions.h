@@ -186,3 +186,13 @@ tuple<int,int,int> subtractCoords(tuple<int,int,int> coordsOne,tuple<int,int,int
 tuple<pair<int,int>, pair<int,int>, pair<int,int>> findTransformation(tuple<int,int,int> vectorK,tuple<int,int,int> vectorL);
 tuple<int,int,int> transformLtoK(tuple<int,int,int> coords,tuple<pair<int,int>, pair<int,int>, pair<int,int>> transformation);
 void moveBeaconsToK(Scanner scannerK, Scanner scannerL);
+
+pair<int,int> Day20(string filename);
+string getAlgorithm(vector<string> data); //the first string is the algorithm
+vector<string> getImage(vector<string> data); //the image is a grid of . and #
+int findNumberOn(vector<string> image, string algorithm,int repetitions);
+void displayImage(vector<string> image);
+vector<string> enhanceImage(vector<string> image, string algorithm);
+vector<string> enlargeImage(vector<string> image, char edge);
+int findBinary(int i,int j, vector<string> image);
+int countLitPixels(vector<string> image);
