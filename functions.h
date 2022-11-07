@@ -196,3 +196,9 @@ vector<string> enhanceImage(vector<string> image, string algorithm);
 vector<string> enlargeImage(vector<string> image, char edge);
 int findBinary(int i,int j, vector<string> image);
 int countLitPixels(vector<string> image);
+
+pair<int,long int> Day21(string filename);
+vector<int> getPositions(vector<string> data);
+int runDeterministic(vector<int> positions);
+long int runDirac(vector<int> positions);
+vector<long int> moveOnce(vector<int> positions,vector<int> scores,bool player);

@@ -641,10 +641,16 @@ int main() {
   std::cout << "max " << beaconsAndMax.second << std::endl;
 */
   //Day 20
+  /*
   pair<int,int> pixelsAndMax = Day20("test20.txt"); //test case
   //pair<int,int> pixelsAndMax = Day20("Day20-input.txt");
   std::cout << "2 enhancements " << pixelsAndMax.first << std::endl;
   std::cout << "50 enhancements " << pixelsAndMax.second << std::endl;
+*/
+  //Day 21
+  pair<int,long int> scoreAndMax = Day21("Day21-input.txt");
+  std::cout << "deterministic 100-sided die " << scoreAndMax.first << std::endl;
+  std::cout << "? " << scoreAndMax.second << std::endl;
   
 	return 0;
 }
